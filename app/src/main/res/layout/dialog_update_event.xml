@@ -1,0 +1,38 @@
+<!-- dialog_update_event.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/update_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목"/>
+
+    <EditText
+        android:id="@+id/update_event_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="글쓴이"/>
+
+    <EditText
+        android:id="@+id/update_event_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="내용"/>
+
+    <EditText
+        android:id="@+id/update_event_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="작성시간"/>
+
+<!--    <EditText-->
+<!--        android:id="@+id/update_event_location"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Event Location"/>-->
+</LinearLayout>
