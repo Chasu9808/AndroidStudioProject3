@@ -2,6 +2,7 @@ package com.busanit501.androidstudioproject3
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -43,9 +44,11 @@ class RegisterActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val token = response.body()?.token
                     App.prefs.token = token
+                    Log.d("JWT_TOKEN", "Registration successful. Token: $token")
                     Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                 } else {
+                    Log.d("JWT_TOKEN", "Registration failed. Response: ${response.errorBody()?.string()}")
                     Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                 }
             }
