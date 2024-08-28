@@ -8,14 +8,16 @@
     tools:context=".LoginActivity">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".LoginActivity">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Logo -->
         <ImageView
@@ -24,8 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"  />
-<!--            android:src="@drawable/toollogo" -->
-
+        <!--            android:src="@drawable/toollogo" -->
 
         <!-- Email Input -->
         <com.google.android.material.textfield.TextInputLayout
