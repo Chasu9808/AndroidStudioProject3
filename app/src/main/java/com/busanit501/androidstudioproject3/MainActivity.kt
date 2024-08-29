@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "onCreate 실행됨")
-        setContentView(R.layout.activity_main)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.image_classify)
+        setContentView(R.layout.image_classify)
 
         imageView = findViewById(R.id.imageView)
         resultTextView = findViewById(R.id.resultTextView)
