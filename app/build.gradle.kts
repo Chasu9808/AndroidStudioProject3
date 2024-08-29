@@ -47,7 +47,7 @@ android {
 dependencies {
     implementation(libs.androidx.activity)
     // Room 버전을 직접 명시합니다.
-    val roomVersion = "2.5.1"
+    val roomVersion = "2.6.0"
 
     // 뷰페이저2 추가
     implementation("androidx.viewpager2:viewpager2:1.0.0")
