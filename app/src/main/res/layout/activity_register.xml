@@ -89,13 +89,14 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <!-- Login Link -->
-        <TextView
-            android:id="@+id/loginLink"
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:backgroundTint="@android:color/transparent"
             android:text="Already have an account? Login"
             android:textColor="@color/primary"
             android:textSize="16sp"
