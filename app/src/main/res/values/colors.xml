@@ -4,7 +4,10 @@
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
     <color name="white">#FFFFFF</color>
-    <color name="light_gray">#F5F5F5</color>
-    <color name="purple">#673AB7</color>
-    <color name="button_color">#673AB7</color>
+    <color name="black">#000000</color>
+    <color name="gray">#B0B0B0</color>
+    <color name="dark_gray">#333333</color>
+    <color name="dark_brown">#4E342E</color>
+    <color name="beige">#D7CCC8</color>
+    <color name="khaki_green">#8D6E63</color>
 </resources>
