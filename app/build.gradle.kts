@@ -3,6 +3,8 @@ import kotlin.script.experimental.jvm.util.KotlinJars.stdlib
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
+    id("kotlin-kapt")
 }
 
 android {
@@ -53,4 +55,9 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:2.1.3")
     // Optional: For Kotlin-based development
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.7.10")
+    implementation ("androidx.room:room-runtime:2.5.0")
+    kapt ("androidx.room:room-compiler:2.5.0")
+    implementation ("androidx.room:room-ktx:2.5.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 }

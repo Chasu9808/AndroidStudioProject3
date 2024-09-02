@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.busanit501.androidstudioproject3.R
-import com.busanit501.androidstudioproject3.data.Tool
+import com.busanit501.androidstudioproject3.dto.Tool
 import com.busanit501.androidstudioproject3.ToolDetailActivity
 
 class ToolAdapter(
