@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainActivity", "onCreate 실행됨")
-        setContentView(R.layout.image_classify)
+        Log.d("MainActivitySpring", "onCreate 실행됨")
         setContentView(R.layout.image_classify)
 
         imageView = findViewById(R.id.imageView)
@@ -136,14 +135,25 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             val result = response.body()
-                            result?.let {
-                                // 서버에서 받은 데이터를 UI에 표시
+                            if (result != null) {
+                                Log.d("MainActivitySpring", "서버 응답 성공: $result")
+
                                 val displayText = """
-                                Predicted Class: ${it.predictedClassLabel}
-                            """.trimIndent()
+                                Predicted Class: ${result.predictedClassLabel}
+                                Confidence: ${result.confidence}
+                                Class Confidences: ${result.classConfidences?.entries?.joinToString("\n") { entry -> "${entry.key}: ${entry.value}" }}
+                                """.trimIndent()
+
                                 resultTextView.text = displayText
+                            } else {
+                                Log.d("MainActivitySpring", "서버 응답이 null입니다.")
+                                val errorBody = response.errorBody()?.string()
+                                Log.d("MainActivitySpring", "응답 에러: ${response.code()}, $errorBody")
+                                Toast.makeText(this@MainActivity, "응답을 가져오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
                             }
                         } else {
+                            val errorBody = response.errorBody()?.string()
+                            Log.d("MainActivitySpring", "응답 에러: ${response.code()}, $errorBody")
                             Toast.makeText(
                                 this@MainActivity,
                                 "응답을 가져오는 데 실패했습니다.",
@@ -153,15 +163,16 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<ClassificationResponse>, t: Throwable) {
+                        Log.d("MainActivitySpring", "서버 연결 실패: ${t.message}")
                         Toast.makeText(this@MainActivity, "서버와 연결할 수 없습니다.", Toast.LENGTH_SHORT)
                             .show()
                     }
                 })
         } ?: run {
+            Log.d("MainActivitySpring", "이미지 파일 변환 실패")
             Toast.makeText(this, "이미지 파일 변환에 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun convertBitmapToFile(filename: String, bitmap: Bitmap): File? {
         return try {
@@ -173,9 +184,11 @@ class MainActivity : AppCompatActivity() {
             outputStream.flush()
             outputStream.close()
 
+            Log.d("MainActivitySpring", "이미지 파일 변환 성공: ${file.absolutePath}")
             file
         } catch (e: Exception) {
             e.printStackTrace()
+            Log.d("MainActivitySpring", "이미지 파일 변환 중 오류 발생: ${e.message}")
             null
         }
     }
