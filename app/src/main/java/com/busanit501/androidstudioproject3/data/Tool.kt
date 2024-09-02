@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3
+package com.busanit501.androidstudioproject3.data
 
 data class Tool(
     val id: String,
