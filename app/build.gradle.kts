@@ -1,3 +1,5 @@
+import kotlin.script.experimental.jvm.util.KotlinJars.stdlib
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -37,6 +39,7 @@ android {
 
 dependencies {
 
+    implementation ("androidx.activity:activity-ktx:1.6.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,4 +48,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("androidx.appcompat:appcompat:1.4.1")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.3")
+    // Optional: For Kotlin-based development
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.7.10")
 }
