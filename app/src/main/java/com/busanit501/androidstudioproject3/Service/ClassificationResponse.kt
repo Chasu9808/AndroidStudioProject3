@@ -5,10 +5,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 data class ClassificationResponse(
-    @SerializedName("confidence") val confidence: Double?,
-    @SerializedName("predicted_class_index") val predictedClassIndex: Int?,
-    @SerializedName("predicted_class_label") val predictedClassLabel: String?,
-    @SerializedName("class_confidences") val classConfidences: Map<String, Double>?
+//    @SerializedName("confidence") val confidence: Double,
+//    @SerializedName("predicted_class_index") val predictedClassIndex: Int,
+//    @SerializedName("predicted_class_label") val predictedClassLabel: String,
+//    @SerializedName("class_confidences") val classConfidences: Map<String, Double>
+//    @SerializedName("videoUrl") val videoUrl: String,
+    @SerializedName("predictedLabel") val predictedLabel: String
 )
 
 

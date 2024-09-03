@@ -127,21 +127,29 @@ class MainActivity : AppCompatActivity() {
             val requestFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", it.name, requestFile)
 
+            Log.d("MainActivitySpring","test : " + body)
             RetrofitClient.instance.uploadImage(body)
                 .enqueue(object : Callback<ClassificationResponse> {
                     override fun onResponse(
                         call: Call<ClassificationResponse>,
                         response: Response<ClassificationResponse>
                     ) {
+                        val rawJson = response.body()
+                        Log.d("MainActivitySpring", "서버 원본 JSON 응답: $rawJson")
+
                         if (response.isSuccessful) {
                             val result = response.body()
                             if (result != null) {
                                 Log.d("MainActivitySpring", "서버 응답 성공: $result")
 
+//                                val displayText = """
+//                                Predicted Class: ${result.predictedLabel}
+//                                videoUrl: ${result.videoUrl}
+//                                Class Confidences: ${result.classConfidences?.entries?.joinToString("\n") { entry -> "${entry.key}: ${entry.value}" }}
+//                                """.trimIndent()
                                 val displayText = """
-                                Predicted Class: ${result.predictedClassLabel}
-                                Confidence: ${result.confidence}
-                                Class Confidences: ${result.classConfidences?.entries?.joinToString("\n") { entry -> "${entry.key}: ${entry.value}" }}
+                                Predicted Class: ${result.predictedLabel}
+                                
                                 """.trimIndent()
 
                                 resultTextView.text = displayText

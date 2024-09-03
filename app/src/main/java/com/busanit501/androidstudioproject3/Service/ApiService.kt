@@ -10,6 +10,6 @@ interface ApiService {
     @Multipart
     @POST("/classify") // Spring 서버의 엔드포인트 URL에 맞게 변경
     fun uploadImage(
-        @Part image: MultipartBody.Part? = null
+        @Part image: MultipartBody.Part
     ): Call<ClassificationResponse>
 }
