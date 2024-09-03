@@ -5,14 +5,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 data class ClassificationResponse(
-    @SerializedName("predicted_class_index") val predictedClassIndex: Int,
-    @SerializedName("predicted_class_label") val predictedClassLabel: String,
-    @SerializedName("confidence") val confidence: Float,
-    @SerializedName("class_confidences") val classConfidences: Map<String, Float>
+    @SerializedName("confidence") val confidence: Double?,
+    @SerializedName("predicted_class_index") val predictedClassIndex: Int?,
+    @SerializedName("predicted_class_label") val predictedClassLabel: String?,
+    @SerializedName("class_confidences") val classConfidences: Map<String, Double>?
 )
 
+
 object RetrofitClient {
-    private const val BASE_URL = "http://10.100.201.52:8000/" // 루트 URL만 지정
+    private const val BASE_URL = "http://10.100.201.52:8080/" // 루트 URL만 지정
     private val client = okhttp3.OkHttpClient.Builder().build()
 
     val instance: ApiService by lazy {
