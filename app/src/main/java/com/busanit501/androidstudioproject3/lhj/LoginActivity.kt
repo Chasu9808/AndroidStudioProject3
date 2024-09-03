@@ -19,8 +19,8 @@ class LoginActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.password).text.toString()
 
             if (validateLogin(username, password)) {
-                // 로그인 성공 시 MainActivity로 이동
-                val intent = Intent(this, MainActivity::class.java)
+                // 로그인 성공 시 ImageClassification으로 이동
+                val intent = Intent(this, ImageClassification::class.java)
                 startActivity(intent)
                 finish()
             } else {
@@ -30,8 +30,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun validateLogin(username: String, password: String): Boolean {
-        // 여기에 로그인 검증 로직을 추가하세요.
-        // 단순히 비어 있지 않은지 확인하는 기본 검증을 예시로 추가하였습니다.
+        // 로그인 검증 로직 추가
         return username.isNotEmpty() && password.isNotEmpty()
     }
 }

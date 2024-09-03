@@ -27,7 +27,8 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 
-class SignUpActivity : AppCompatActivity() {
+// 클래스 이름을 ImageClassfication에서 ImageClassification으로 수정
+class ImageClassification : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
     private lateinit var resultTextView: TextView
@@ -37,8 +38,8 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("SignUpActivity", "onCreate 실행됨")
-        setContentView(R.layout.image_classify)  // 중복된 setContentView 호출 제거
+        Log.d("ImageClassification", "onCreate 실행됨")
+        setContentView(R.layout.image_classify)
 
         imageView = findViewById(R.id.imageView)
         resultTextView = findViewById(R.id.resultTextView)
@@ -92,7 +93,6 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
@@ -105,7 +105,6 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(this, "사진을 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 GALLERY_REQUEST_CODE -> {
                     val selectedImage: Uri? = data.data
                     if (selectedImage != null) {
@@ -123,11 +122,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun uploadImage(bitmap: Bitmap) {
         val file = convertBitmapToFile("image.jpg", bitmap)
-
         file?.let {
             val requestFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", it.name, requestFile)
-
             RetrofitClient.instance.uploadImage(body)
                 .enqueue(object : Callback<ClassificationResponse> {
                     override fun onResponse(
@@ -137,15 +134,12 @@ class SignUpActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val result = response.body()
                             result?.let {
-                                // 서버에서 받은 데이터를 UI에 표시
-                                val displayText = """
-                                Predicted Class: ${it.predictedClassLabel}
-                            """.trimIndent()
+                                val displayText = "Predicted Class: ${it.predictedClassLabel}"
                                 resultTextView.text = displayText
                             }
                         } else {
                             Toast.makeText(
-                                this@SignUpActivity, // 수정된 부분
+                                this@ImageClassification,
                                 "응답을 가져오는 데 실패했습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -153,7 +147,7 @@ class SignUpActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<ClassificationResponse>, t: Throwable) {
-                        Toast.makeText(this@SignUpActivity, "서버와 연결할 수 없습니다.", Toast.LENGTH_SHORT)
+                        Toast.makeText(this@ImageClassification, "서버와 연결할 수 없습니다.", Toast.LENGTH_SHORT)
                             .show()
                     }
                 })
@@ -162,17 +156,14 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-
     private fun convertBitmapToFile(filename: String, bitmap: Bitmap): File? {
         return try {
             val file = File(applicationContext.cacheDir, filename)
             file.createNewFile()
-
             val outputStream = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             outputStream.flush()
             outputStream.close()
-
             file
         } catch (e: Exception) {
             e.printStackTrace()

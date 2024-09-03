@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidStudioProject3</string>
+    <string name="options_menu">옵션 메뉴</string>
 </resources>

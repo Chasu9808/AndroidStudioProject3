@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    // Room을 위한 KSP 플러그인 추가
     id("com.google.devtools.ksp") version "1.9.20-1.0.14"
 }
 
@@ -35,7 +34,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    // 뷰 바인딩 설정
     viewBinding {
         enable = true
     }
@@ -62,6 +60,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // OkHttp 라이브러리 추가
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     // AndroidX Navigation 라이브러리 추가
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
