@@ -44,6 +44,12 @@ class MainActivity : AppCompatActivity() {
                         // startActivity(intent)
                         true
                     }
+                    R.id.action_my_page -> {
+                        // MyPage 액티비티로 이동
+                        val intent = Intent(this, MyPageActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
                     else -> false
                 }
             }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature
@@ -15,36 +16,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.MyApp">
-
+        android:theme="@style/Theme.MyApp"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="com.busanit501.androidstudioproject3.lhj.MyPageActivity"
+            android:exported="true" />
         <!-- MainActivity 설정 -->
         <activity
             android:name="com.busanit501.androidstudioproject3.lhj.MainActivity"
             android:exported="true">
+
             <!-- MainActivity를 시작 액티비티로 설정 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- SignUpActivity 설정 -->
+        </activity> <!-- SignUpActivity 설정 -->
         <activity
             android:name="com.busanit501.androidstudioproject3.lhj.SignUpActivity"
-            android:exported="true" />
-
-        <!-- LoginActivity 설정 -->
+            android:exported="true" /> <!-- LoginActivity 설정 -->
         <activity
             android:name="com.busanit501.androidstudioproject3.lhj.LoginActivity"
-            android:exported="true" />
-
-        <!-- ImageClassification 설정 -->
+            android:exported="true" /> <!-- ImageClassification 설정 -->
         <activity
             android:name="com.busanit501.androidstudioproject3.lhj.ImageClassification"
             android:exported="true" />
-        <!-- intent-filter 제거하여 이 액티비티가 시작 액티비티로 설정되지 않도록 함 -->
-
     </application>
 
 </manifest>

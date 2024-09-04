@@ -9,4 +9,7 @@
     <item
         android:id="@+id/action_inquiry"
         android:title="문의사항" />
+    <item
+        android:id="@+id/action_my_page"
+        android:title="마이페이지"/>
 </menu>
