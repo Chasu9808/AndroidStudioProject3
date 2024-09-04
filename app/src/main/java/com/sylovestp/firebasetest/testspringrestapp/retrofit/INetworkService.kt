@@ -20,7 +20,7 @@ import retrofit2.http.Query
 interface INetworkService {
 
     @Multipart
-    @POST("/api/ai/predict")
+    @POST("/classify")
 //    @POST("/public/users/predict")
 //    fun registerUser(@Body userDTO: UserDTO): Call<Void>
     fun predictImage(
