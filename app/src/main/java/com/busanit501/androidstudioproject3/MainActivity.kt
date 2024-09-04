@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var toolAdapter: ToolAdapter
+
+//    예시 더미 데이터
 //    private lateinit var toolList: MutableList<Tool>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         fetchToolsFromServer()
 
+//        예시 더미 데이터
 //        toolList = mutableListOf(
 //            Tool("1", "Hammer", "A short description of Hammer", "A detailed description of Hammer"),
 //            Tool("2", "Screwdriver", "A short description of Screwdriver", "A detailed description of Screwdriver")
