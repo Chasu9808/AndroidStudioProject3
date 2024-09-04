@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AndroidStudioProject3"
+rootProject.name = "TestSpringRestApp"
 include(":app")

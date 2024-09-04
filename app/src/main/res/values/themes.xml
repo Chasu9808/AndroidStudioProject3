@@ -1,9 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AndroidStudioProject3" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.TestSpringRestApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.AndroidStudioProject3" parent="Base.Theme.AndroidStudioProject3" />
+    <style name="Theme.TestSpringRestApp" parent="Base.Theme.TestSpringRestApp" />
+
+        <style name="CircleImageViewStyle">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSize">50%</item> <!-- 크기를 50%로 설정하여 원형으로 만듭니다 -->
+        </style>
+
 </resources>
