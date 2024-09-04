@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Short Description -->
     <TextView
         android:id="@+id/shortDescriptionTextView"
         android:layout_width="0dp"
@@ -23,5 +24,37 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+
+    <!-- Image Text -->
+    <TextView
+        android:id="@+id/imgTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Image Text"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shortDescriptionTextView" />
+
+    <!-- Registration Date -->
+    <TextView
+        android:id="@+id/regDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Registration Date"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgTextView" />
+
+    <!-- Modification Date -->
+    <TextView
+        android:id="@+id/modDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Modification Date"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regDateTextView" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

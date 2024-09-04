@@ -1,8 +1,6 @@
 package com.busanit501.androidstudioproject3.dto
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDateTime
-import java.util.Date
 
 data class Tool(
     val id: Long,

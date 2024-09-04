@@ -9,7 +9,7 @@
         android:id="@+id/nameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Tool Name"
+        android:text="공구 이름 : "
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +19,40 @@
         android:id="@+id/descriptionTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Detailed Description"
+        android:text="상세 설명 : "
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/imgTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="이미지"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
+
+    <!-- Registration Date -->
+    <TextView
+        android:id="@+id/regDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="regDate"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgTextView" />
+
+    <!-- Modification Date -->
+    <TextView
+        android:id="@+id/modDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="modDate"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regDateTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

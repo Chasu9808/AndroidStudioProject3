@@ -28,6 +28,9 @@ class ToolAdapter(
         val tool = toolList[position]
         holder.nameTextView.text = tool.toolName
         holder.shortDescriptionTextView.text = tool.description
+        holder.imgTextView.text = tool.imgText
+        holder.regDateTextView.text = tool.regDate
+        holder.modDateTextView.text = tool.modDate
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ToolDetailActivity::class.java).apply {
@@ -47,5 +50,8 @@ class ToolAdapter(
     class ToolViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val shortDescriptionTextView: TextView = itemView.findViewById(R.id.shortDescriptionTextView)
+        val imgTextView: TextView = itemView.findViewById(R.id.imgTextView)
+        val regDateTextView: TextView = itemView.findViewById(R.id.regDateTextView)
+        val modDateTextView: TextView = itemView.findViewById(R.id.modDateTextView)
     }
 }
