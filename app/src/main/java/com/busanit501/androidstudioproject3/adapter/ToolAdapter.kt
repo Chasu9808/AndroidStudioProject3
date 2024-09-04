@@ -2,10 +2,12 @@ package com.busanit501.androidstudioproject3.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.busanit501.androidstudioproject3.R
 import com.busanit501.androidstudioproject3.dto.Tool
@@ -21,16 +23,20 @@ class ToolAdapter(
         return ToolViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ToolViewHolder, position: Int) {
         val tool = toolList[position]
-        holder.nameTextView.text = tool.name
-        holder.shortDescriptionTextView.text = tool.shortDescription
+        holder.nameTextView.text = tool.toolName
+        holder.shortDescriptionTextView.text = tool.description
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ToolDetailActivity::class.java).apply {
                 putExtra("tool_id", tool.id)
-                putExtra("tool_name", tool.name)
-                putExtra("tool_description", tool.detailedDescription)
+                putExtra("tool_name", tool.toolName)
+                putExtra("tool_description", tool.description)
+                putExtra("regDate", tool.regDate)
+                putExtra("modDate", tool.modDate)
+                putExtra("img_text", tool.imgText)
             }
             context.startActivity(intent)
         }
