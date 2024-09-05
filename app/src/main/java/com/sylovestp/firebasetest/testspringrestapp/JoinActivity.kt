@@ -15,12 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.FutureTarget
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityJoinBinding
-import com.sylovestp.firebasetest.testspringrestapp.databinding.ItemViewBinding
 import com.sylovestp.firebasetest.testspringrestapp.dto.UserDTO
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
 import kotlinx.coroutines.Dispatchers
@@ -105,7 +103,7 @@ class JoinActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
-            val intent = Intent(this@JoinActivity, LoginActivity::class.java)
+            val intent = Intent(this@JoinActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -140,7 +138,7 @@ class JoinActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@JoinActivity, "User created successfully", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@JoinActivity, LoginActivity::class.java)
+                    val intent = Intent(this@JoinActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
