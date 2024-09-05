@@ -12,6 +12,7 @@ constraintlayout = "2.1.4"
 pagingCommonAndroid = "3.3.2"
 pagingRuntimeKtx = "3.3.2"
 mediationTestSuite = "3.0.0"
+media3Common = "1.4.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,6 +26,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "pagingCommonAndroid" }
 androidx-paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 mediation-test-suite = { group = "com.google.android.ads", name = "mediation-test-suite", version.ref = "mediationTestSuite" }
+androidx-media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Common" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
