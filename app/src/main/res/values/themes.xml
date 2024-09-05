@@ -44,8 +44,8 @@
     <!-- Define a rectangular style with shadow -->
     <style name="RectangleWithShadow">
         <item name="android:background">@drawable/rectangle_with_shadow</item>
-        <!--        <item name="android:padding">16dp</item>-->
-        <!--        <item name="android:layout_margin">8dp</item>-->
+<!--        <item name="android:padding">16dp</item>-->
+<!--        <item name="android:layout_margin">8dp</item>-->
     </style>
 
     <!-- res/values/styles.xml -->
