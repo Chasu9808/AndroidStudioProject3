@@ -5,10 +5,20 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/toolImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Tool Image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:text="Tool Name"
         android:textSize="18sp"
         android:textStyle="bold"
