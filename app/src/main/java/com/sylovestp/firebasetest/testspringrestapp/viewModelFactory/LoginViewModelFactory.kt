@@ -1,9 +1,10 @@
 package com.sylovestp.firebasetest.testspringrestapp.viewModelFactory
 
+import LoginViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sylovestp.firebasetest.testspringrestapp.repository.LoginRepository
-import com.sylovestp.firebasetest.testspringrestapp.viewModel.LoginViewModel
+
 
 class LoginViewModelFactory(
     private val loginRepository: LoginRepository

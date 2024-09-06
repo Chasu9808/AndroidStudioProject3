@@ -12,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -21,16 +22,12 @@ interface INetworkService {
 
     @Multipart
     @POST("/classify")
-//    @POST("/public/users/predict")
-//    fun registerUser(@Body userDTO: UserDTO): Call<Void>
     fun predictImage(
-//        @Part("user") user: RequestBody?,          // JSON 데이터
         @Part image: MultipartBody.Part? = null    // 파일 데이터 (Optional)
     ): Call<PredictionResult>
 
     @Multipart
     @POST("/public/users")
-//    fun registerUser(@Body userDTO: UserDTO): Call<Void>
     fun registerUser(
         @Part("user") user: RequestBody,          // JSON 데이터
         @Part profileImage: MultipartBody.Part? = null    // 파일 데이터 (Optional)
@@ -38,6 +35,11 @@ interface INetworkService {
 
     @POST("/generateToken")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+
+    @POST("/users/mypage/deleteAccount")
+    fun deleteAccount(
+        @Header("Authorization") token: String
+    ): Call<ResponseBody>
 
     @GET("/api/users/page")
     fun getItems(

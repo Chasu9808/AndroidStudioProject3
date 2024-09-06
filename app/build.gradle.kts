@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     //room
     id("com.google.devtools.ksp") version "1.9.20-1.0.14"
+
     id("kotlin-kapt")
 }
 
@@ -64,6 +65,7 @@ dependencies {
     implementation(libs.androidx.paging.common.android)
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.mediation.test.suite)
+    implementation(libs.androidx.media3.common)
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
