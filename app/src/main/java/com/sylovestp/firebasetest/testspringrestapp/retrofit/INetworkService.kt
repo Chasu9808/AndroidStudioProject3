@@ -11,6 +11,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
@@ -36,10 +37,11 @@ interface INetworkService {
     @POST("/generateToken")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    @POST("/users/mypage/deleteAccount")
+    @DELETE("/users/mypage/deleteAccount")
     fun deleteAccount(
         @Header("Authorization") token: String
     ): Call<ResponseBody>
+
 
     @GET("/api/users/page")
     fun getItems(
