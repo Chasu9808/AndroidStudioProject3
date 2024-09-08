@@ -41,12 +41,18 @@ class MyPageActivity : AppCompatActivity() {
 
         if (token != null) {
             val bearerToken = "Bearer $token"
+            Log.d("bearerToken","bearerToken 불러오기 : $bearerToken")
             myApplication.getApiService().deleteAccount(bearerToken)
                 .enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
-                    ) {
+                    )
+
+                    {
+                        Log.d("RetrofitRequest", "Request URL: ${call.request().url}")
+                        Log.d("RetrofitRequest", "Request Headers: ${call.request().headers}")
+
                         if (response.isSuccessful) {
                             // 계정 삭제 성공 후 SharedPreferences 초기화
                             val editor = sharedPreferences.edit()
