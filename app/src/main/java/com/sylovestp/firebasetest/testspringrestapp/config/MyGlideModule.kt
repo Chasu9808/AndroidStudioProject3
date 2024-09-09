@@ -1,5 +1,6 @@
 package com.sylovestp.firebasetest.testspringrestapp.config
 
+import AuthorizationInterceptor
 import android.content.Context
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Registry

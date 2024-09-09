@@ -41,19 +41,23 @@ class MyPageActivity : AppCompatActivity() {
 
         if (token != null) {
             val bearerToken = "Bearer $token"
-            Log.d("bearerToken","bearerToken 불러오기 : $bearerToken")
+            Log.d("BearerToken", "BearerToken 불러오기: $bearerToken")
+
+            // Retrofit 요청 시작
             myApplication.getApiService().deleteAccount(bearerToken)
                 .enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
-                    )
-
-                    {
+                    ) {
+                        // 요청 URL 및 헤더 로그 출력
                         Log.d("RetrofitRequest", "Request URL: ${call.request().url}")
                         Log.d("RetrofitRequest", "Request Headers: ${call.request().headers}")
 
+                        // 응답이 성공적인지 확인
                         if (response.isSuccessful) {
+                            Log.d("RetrofitResponse", "Response 성공: ${response.body()?.string()}")
+
                             // 계정 삭제 성공 후 SharedPreferences 초기화
                             val editor = sharedPreferences.edit()
                             editor.clear()  // 모든 데이터를 삭제
@@ -72,6 +76,8 @@ class MyPageActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()  // 현재 액티비티 종료
                         } else {
+                            Log.e("RetrofitResponse", "Response 실패: ${response.errorBody()?.string()} - Code: ${response.code()}")
+
                             Toast.makeText(
                                 this@MyPageActivity,
                                 "Failed to delete account: ${response.message()}",
@@ -81,6 +87,7 @@ class MyPageActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        // 요청 실패 시 로그 및 사용자에게 알림
                         Log.e("DeleteAccount", "Error: ${t.message}")
                         Toast.makeText(
                             this@MyPageActivity,
@@ -91,6 +98,7 @@ class MyPageActivity : AppCompatActivity() {
                 })
         } else {
             Toast.makeText(this, "Token not found, please login again", Toast.LENGTH_SHORT).show()
+
             // 토큰이 없을 때 로그인 화면으로 이동
             val intent = Intent(this@MyPageActivity, MainActivity::class.java)
             startActivity(intent)
