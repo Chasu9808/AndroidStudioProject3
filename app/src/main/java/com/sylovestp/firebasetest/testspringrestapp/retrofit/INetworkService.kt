@@ -37,7 +37,7 @@ interface INetworkService {
     @POST("/generateToken")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    @DELETE("/users/mypage/deleteAccount")
+    @DELETE("api/users/mypage/deleteAccount")
     fun deleteAccount(@Header("Authorization") token: String): Call<ResponseBody>
 
     @GET("/api/users/page")
