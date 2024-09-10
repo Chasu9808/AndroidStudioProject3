@@ -18,7 +18,7 @@ data class Tool(
     val regDate: String,
 
     @SerializedName("modDate")
-    val modDate: String,
+    val modDate: String
 
-    val imageFileName: String
+//    val imageFileName: String
 )

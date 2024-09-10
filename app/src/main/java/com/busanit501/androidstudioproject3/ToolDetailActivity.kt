@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class ToolDetailActivity : AppCompatActivity() {
 
-//    private lateinit var toolImageView: ImageView
+    private lateinit var toolImageView: ImageView
     private lateinit var nameTextView: TextView
     private lateinit var descriptionTextView: TextView
     private lateinit var imgTextView: TextView
@@ -21,7 +21,7 @@ class ToolDetailActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_tool_detail)
 
-//        toolImageView = findViewById(R.id.toolImageView)
+        toolImageView = findViewById(R.id.toolImageView)
         nameTextView = findViewById(R.id.nameTextView)
         descriptionTextView = findViewById(R.id.descriptionTextView)
         imgTextView = findViewById(R.id.imgTextView)
@@ -40,6 +40,23 @@ class ToolDetailActivity : AppCompatActivity() {
         imgTextView.text = imgText
         regDateTextView.text = regDate
         modDateTextView.text = modDate
+
+        val imageResId = when (toolName) {
+            "망치" -> R.drawable.hammer
+            "니퍼" -> R.drawable.nipper
+            "줄자" -> R.drawable.tape_measure
+            "그라인더" -> R.drawable.grinder
+            "드라이버" -> R.drawable.screwdriver
+            "전동드릴" -> R.drawable.drill
+            "스패너" -> R.drawable.spanner
+            "공업가위" -> R.drawable.scissors
+            "톱" -> R.drawable.saw
+            "캘리퍼스" -> R.drawable.vernier_calipers
+            else -> R.drawable.ic_launcher_foreground  // 기본 이미지 설정
+        }
+
+        // 이미지뷰에 이미지 설정
+        toolImageView.setImageResource(imageResId)
 
 
     }
