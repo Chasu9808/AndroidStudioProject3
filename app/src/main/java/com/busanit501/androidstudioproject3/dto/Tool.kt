@@ -1,8 +1,24 @@
 package com.busanit501.androidstudioproject3.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class Tool(
-    val id: String,
-    val name: String,
-    val shortDescription: String,
-    val detailedDescription: String
+    val id: Long,
+
+    @SerializedName("tool_name")
+    val toolName: String,
+
+    @SerializedName("description")
+    val description: String,
+
+    @SerializedName("img_text")
+    val imgText: String,
+
+    @SerializedName("regDate")
+    val regDate: String,
+
+    @SerializedName("modDate")
+    val modDate: String
+
+//    val imageFileName: String
 )
