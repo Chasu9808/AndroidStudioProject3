@@ -1,107 +1,106 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
-    >
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@drawable/rounded_rectangle_with_border"
-    >
+    android:paddingBottom="10dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_rectangle_with_border"
+        >
 
-        <TextView
-            android:id="@+id/event_name_view"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold"
-            android:textSize="25sp"/>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/event_description_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textColor="#868e96"
-            android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/event_name_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:textSize="25sp"/>
 
-
-        <TextView
-            android:id="@+id/event_time_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"/>
-
-<!--        <TextView-->
-<!--            android:id="@+id/event_date_view"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="16sp"/>-->
+            <TextView
+                android:id="@+id/event_description_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColor="#868e96"
+                android:textSize="16sp"/>
 
 
+            <TextView
+                android:id="@+id/event_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/event_location_view"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="16sp"/>-->
+            <!--        <TextView-->
+            <!--            android:id="@+id/event_date_view"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:textSize="16sp"/>-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/event_count_view"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="16sp"/>-->
+
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/event_location_view"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:textSize="16sp"/>-->
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/event_count_view"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:textSize="16sp"/>-->
+        </LinearLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/event_image_view"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_margin="8dp"
+            android:visibility="gone"/>
+
+
+
     </LinearLayout>
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:layout_gravity="center">-->
 
-    <ImageView
-        android:id="@+id/event_image_view"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_image_border"
-        android:visibility="gone"/>
+    <!--        <Button-->
+    <!--            android:id="@+id/delete_event_button"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="삭제"-->
+    <!--            android:layout_marginEnd="8dp" />-->
 
-
-
-</LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_gravity="center">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/delete_event_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="삭제"-->
-<!--            android:layout_marginEnd="8dp" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/edit_event_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="수정" />-->
-<!--    </LinearLayout>-->
+    <!--        <Button-->
+    <!--            android:id="@+id/edit_event_button"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="수정" />-->
+    <!--    </LinearLayout>-->
 
     <!-- 가로 선 -->
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
 
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_alignParentTop="true"/>-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_alignParentTop="true"/>-->
 
 </LinearLayout>

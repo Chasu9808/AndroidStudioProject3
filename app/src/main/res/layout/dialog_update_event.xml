@@ -9,31 +9,33 @@
         android:id="@+id/update_event_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Name" />
+        android:hint="제목" />
 
     <EditText
         android:id="@+id/update_event_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Description" />
+        android:hint="글쓴이" />
 
     <EditText
         android:id="@+id/update_event_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Date" />
+        android:hint="내용" />
 
     <EditText
         android:id="@+id/update_event_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Time" />
+        android:hint="작성시간" />
 
     <!-- Add a button for editing the image -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/update_event_image_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/black3"
+        android:textColor="@color/backgroundColor"
         android:text="이미지 수정"
         android:layout_marginTop="8dp" />
 
@@ -45,3 +47,4 @@
         android:layout_marginTop="8dp" />
 
 </LinearLayout>
+<!--//-->
