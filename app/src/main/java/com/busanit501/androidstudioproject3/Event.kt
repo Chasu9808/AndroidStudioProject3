@@ -1,3 +1,5 @@
+package com.busanit501.androidstudioproject3
+
 data class Event(
     val name: String = "",
     val description: String = "",

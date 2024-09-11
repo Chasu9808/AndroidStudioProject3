@@ -6,3 +6,4 @@
     android:background="@drawable/border_radius"
     android:scaleType="centerCrop"
     android:adjustViewBounds="true"/>
+<!--//-->

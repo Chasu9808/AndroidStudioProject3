@@ -1,4 +1,4 @@
-package com.example.test1
+package com.busanit501.androidstudioproject3
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -45,7 +45,7 @@ class EventDetailActivity : AppCompatActivity() {
         val eventImageView = findViewById<ImageView>(R.id.event_image_view)
         val deleteButton = findViewById<Button>(R.id.delete_event_button)
         val updateButton = findViewById<Button>(R.id.update_event_button)
-        val button1 = findViewById<Button>(R.id.button1) // 변수명 수정
+        val button1 = findViewById<ImageView>(R.id.button1) // 변수명 수정
 
         // Get event details from intent
         val eventName = intent.getStringExtra("eventName")

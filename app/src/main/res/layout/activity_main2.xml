@@ -10,30 +10,31 @@
         android:orientation="vertical"
         >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시판 글작성"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="게시판 글작성"
+            android:textStyle="bold"
+            android:textSize="25sp" />
 
 
 
 
-    <EditText
-        android:id="@+id/event_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="10dp"
-        android:hint="제목" />
+        <EditText
+            android:id="@+id/event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:hint="제목" />
 
-    <EditText
-        android:id="@+id/event_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="글쓴이" />
+        <EditText
+            android:id="@+id/event_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="글쓴이" />
 
 
         <EditText
@@ -43,26 +44,24 @@
             android:layout_marginBottom="10dp"
             android:hint="작성시간" />
 
-    <EditText
-        android:id="@+id/event_date"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/textview_border"
-        android:layout_marginBottom="10dp"
-        android:hint="내용" />
+        <EditText
+            android:id="@+id/event_date"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/textview_border"
+            android:layout_marginBottom="10dp"
+            android:hint="내용" />
 
 
-
-
-    <Button
-        android:id="@+id/upload_file_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="이미지업로드"
-        android:background="@drawable/button_square"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/upload_file_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="이미지업로드"
+            android:background="@drawable/black3"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/image_preview"
@@ -71,37 +70,47 @@
             android:visibility="gone"
             android:contentDescription="Image Preview"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <Button
-            android:id="@+id/create_event"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저장"
-            android:layout_marginEnd="8dp"
-            />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            >
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/create_event"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/black2"
+                android:textColor="#FFFFFF"
+                android:text="저장"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/black2"
+                android:textColor="#FFFFFF"
+                android:text="취소"
+                />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/event_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="취소"
-            android:layout_marginStart="8dp"
-            />
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/event_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp" />
-
-</LinearLayout>
-    </ScrollView>
+</ScrollView>
