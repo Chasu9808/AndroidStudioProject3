@@ -17,6 +17,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.busanit501.androidstudioproject3.ToolDetailActivity
 
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityMainBinding
 import com.sylovestp.firebasetest.testspringrestapp.repository.LoginRepository
@@ -144,6 +145,11 @@ class MainActivity : AppCompatActivity() {
                         R.id.action_inquiry -> true // 아직 구현되지 않음
                         R.id.action_my_page -> {
                             val intent = Intent(this, MyPageActivity::class.java)
+                            startActivity(intent)
+                            true
+                        }
+                        R.id.action_tool_detail -> {
+                            val intent = Intent(this, ToolDetailActivity::class.java)
                             startActivity(intent)
                             true
                         }

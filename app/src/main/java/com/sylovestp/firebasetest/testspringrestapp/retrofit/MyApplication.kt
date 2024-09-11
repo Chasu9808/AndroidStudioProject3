@@ -14,7 +14,7 @@ class MyApplication : Application(){
     private lateinit var apiService: INetworkService
 
     // http 퍼미션 허용 및, 로컬호스트 안될시 아이피로 확인 하기.
-    val BASE_URL = "http://192.168.219.100:8080"
+    val BASE_URL = "http://10.100.201.29:8080"
 //    val BASE_URL = "http://192.168.219.200:8080"
 
     //add....................................
