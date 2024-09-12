@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3
+package com.sylovestp.firebasetest.testspringrestapp
 
 data class Event(
     val name: String = "",
