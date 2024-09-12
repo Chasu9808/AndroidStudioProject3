@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "1004196262237",
-    "firebase_url": "https://test1-f824c-default-rtdb.firebaseio.com",
-    "project_id": "test1-f824c",
-    "storage_bucket": "test1-f824c.appspot.com"
+    "project_number": "316742254845",
+    "firebase_url": "https://testspringrestapp-default-rtdb.firebaseio.com",
+    "project_id": "testspringrestapp",
+    "storage_bucket": "testspringrestapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1004196262237:android:bf54b9aedc258e269278b4",
+        "mobilesdk_app_id": "1:316742254845:android:f7a47f7ab4276cd9503e94",
         "android_client_info": {
           "package_name": "com.example.firebaseexample"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBBmLlHPhHACDtJbQ-KHg8TkV0TdjEWPRE"
+          "current_key": "AIzaSyCigldJ8kdEabVBkXtHnrvGRyzMz9dCRkA"
         }
       ],
       "services": {
@@ -27,34 +27,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1004196262237:android:48e43a133fd07db69278b4",
+        "mobilesdk_app_id": "1:316742254845:android:8a8c48d50f908e8f503e94",
         "android_client_info": {
-          "package_name": "com.example.test1"
+          "package_name": "com.sylovestp.firebasetest.testspringrestapp"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBBmLlHPhHACDtJbQ-KHg8TkV0TdjEWPRE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1004196262237:android:c6c7d602775debce9278b4",
-        "android_client_info": {
-          "package_name": "com.example.test2"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBBmLlHPhHACDtJbQ-KHg8TkV0TdjEWPRE"
+          "current_key": "AIzaSyCigldJ8kdEabVBkXtHnrvGRyzMz9dCRkA"
         }
       ],
       "services": {
