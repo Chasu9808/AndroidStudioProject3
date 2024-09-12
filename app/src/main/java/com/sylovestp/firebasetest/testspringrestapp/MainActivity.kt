@@ -1,7 +1,6 @@
 package com.sylovestp.firebasetest.testspringrestapp
 
 import LoginViewModel
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -15,9 +14,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.busanit501.androidstudioproject3.ToolDetailActivity
 
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityMainBinding
 import com.sylovestp.firebasetest.testspringrestapp.repository.LoginRepository
@@ -148,8 +144,8 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                             true
                         }
-                        R.id.action_tool_detail -> {
-                            val intent = Intent(this, ToolDetailActivity::class.java)
+                        R.id.action_tool_list-> {
+                            val intent = Intent(this, ToollistActivity::class.java)
                             startActivity(intent)
                             true
                         }

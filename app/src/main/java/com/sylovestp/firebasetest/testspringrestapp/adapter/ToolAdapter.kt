@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3.adapter
+package com.sylovestp.firebasetest.testspringrestapp.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -10,9 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.busanit501.androidstudioproject3.R
-import com.busanit501.androidstudioproject3.dto.Tool
-import com.busanit501.androidstudioproject3.ToolDetailActivity
+import com.sylovestp.firebasetest.testspringrestapp.dto.Tool
+import com.sylovestp.firebasetest.testspringrestapp.ToolDetailActivity
+import com.sylovestp.firebasetest.testspringrestapp.R
 
 class ToolAdapter(
     private val toolList: List<Tool>,

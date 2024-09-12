@@ -25,6 +25,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ToolDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ToollistActivity"
+            android:exported="true" />
+        <activity
             android:name=".MyPageActivity"
             android:exported="true" />
         <activity
@@ -52,7 +58,6 @@
             android:name=".JoinActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".SplashActivity"
             android:exported="true">

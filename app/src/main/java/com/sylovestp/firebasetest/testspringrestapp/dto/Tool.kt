@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3.dto
+package com.sylovestp.firebasetest.testspringrestapp.dto
 
 import com.google.gson.annotations.SerializedName
 

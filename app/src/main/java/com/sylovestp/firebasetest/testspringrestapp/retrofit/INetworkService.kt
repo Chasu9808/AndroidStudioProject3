@@ -1,6 +1,6 @@
 package com.sylovestp.firebasetest.testspringrestapp.retrofit
 
-import com.busanit501.androidstudioproject3.dto.Tool
+import com.sylovestp.firebasetest.testspringrestapp.dto.Tool
 import com.sylovestp.firebasetest.testspringrestapp.dto.LoginRequest
 import com.sylovestp.firebasetest.testspringrestapp.dto.LoginResponse
 import com.sylovestp.firebasetest.testspringrestapp.dto.PageResponse
@@ -18,7 +18,6 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface INetworkService {
@@ -55,8 +54,9 @@ interface INetworkService {
     ): Response<PageResponse<UserItem>>
 
     @GET("api/tools/list")
-    fun findAll(): Call<List<Tool>>
+    fun findAll(@Header("Authorization") token: String): Call<List<Tool>>
 
-    @GET("api/tools/detail/{id}")
-    fun findById(@Path("id") id: Long): Call<Tool>
+
+//    @GET("api/tools/detail/{id}")
+//    fun findById(@Path("id") id: Long): Call<Tool>
 }

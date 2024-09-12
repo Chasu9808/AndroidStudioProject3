@@ -6,7 +6,7 @@ plugins {
 
     id("kotlin-kapt")
 }
-
+//
 android {
     namespace = "com.sylovestp.firebasetest.testspringrestapp"
     compileSdk = 34
@@ -58,6 +58,7 @@ dependencies {
 // json 변환하기 위한 또라이브러리, gson 예시.
     implementation ("com.google.code.gson:gson:2.8.9")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
 
     //room
     implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")

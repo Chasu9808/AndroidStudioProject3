@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3
+package com.sylovestp.firebasetest.testspringrestapp
 
 import android.os.Bundle
 import android.widget.ImageView
