@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_image_classification"
+        android:title="이미지분석" />
+    <item
+        android:id="@+id/action_board"
+        android:title="게시판" />
+    <item
+        android:id="@+id/action_inquiry"
+        android:title="문의사항" />
+    <item
+        android:id="@+id/action_my_page"
+        android:title="마이페이지"/>
+    <item
+        android:id="@+id/action_tool_list"
+        android:title="공구리스트"/>
+
+</menu>

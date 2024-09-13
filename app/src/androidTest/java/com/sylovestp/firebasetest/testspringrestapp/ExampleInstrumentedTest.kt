@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3
+package com.sylovestp.firebasetest.testspringrestapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -13,6 +13,6 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.busanit501.androidstudioproject3", appContext.packageName)
+        assertEquals("com.sylovestp.firebasetest.testspringrestapp", appContext.packageName)
     }
 }

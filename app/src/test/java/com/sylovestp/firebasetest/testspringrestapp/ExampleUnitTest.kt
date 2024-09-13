@@ -1,4 +1,4 @@
-package com.busanit501.androidstudioproject3
+package com.sylovestp.firebasetest.testspringrestapp
 
 import org.junit.Test
 import org.junit.Assert.*
