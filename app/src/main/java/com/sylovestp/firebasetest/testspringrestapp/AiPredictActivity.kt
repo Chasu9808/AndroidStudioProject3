@@ -1,6 +1,5 @@
-package com.sylovestp.firebasetest.testspringrestapp
+package com.busanit501.androidstudioproject3
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,8 +15,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
-import com.sylovestp.firebasetest.testspringrestapp.dto.PredictionResult
+import com.busanit501.androidstudioproject3.Service.ClassificationResponse
+import com.busanit501.androidstudioproject3.Service.RetrofitClient
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -27,7 +26,8 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 
-class AiPredictActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
+
     private lateinit var imageView: ImageView
     private lateinit var resultTextView: TextView
     private val CAMERA_REQUEST_CODE = 100
@@ -37,11 +37,7 @@ class AiPredictActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivitySpring", "onCreate 실행됨")
-        setContentView(R.layout.activity_ai_predict)
-
-        // MyApplication 초기화
-        val myApplication = applicationContext as MyApplication
-        myApplication.initialize(this)  // apiService 초기화
+        setContentView(R.layout.image_classify)
 
         imageView = findViewById(R.id.imageView)
         resultTextView = findViewById(R.id.resultTextView)
@@ -49,36 +45,25 @@ class AiPredictActivity : AppCompatActivity() {
         val buttonGallery: Button = findViewById(R.id.buttonGallery)
 
         buttonCamera.setOnClickListener {
-            checkCameraPermissionAndOpenCamera()
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_CODE
+                )
+            } else {
+                openCamera()
+            }
         }
 
         buttonGallery.setOnClickListener {
             val galleryIntent =
                 Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
-        }
-    }
-
-    // 권한 확인 및 요청 메서드
-    private fun checkCameraPermissionAndOpenCamera() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            // 카메라 권한이 없는 경우, 권한 요청
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                // 이전에 권한 요청을 거부한 경우, 왜 권한이 필요한지 설명하고 다시 요청
-                Toast.makeText(this, "카메라 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
-            }
-
-            // 권한 요청
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.CAMERA),
-                CAMERA_PERMISSION_CODE
-            )
-        } else {
-            // 권한이 이미 있는 경우 카메라 열기
-            openCamera()
         }
     }
 
@@ -97,18 +82,13 @@ class AiPredictActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                // 권한이 허용된 경우 카메라 열기
-                openCamera()
-            } else {
-                // 권한이 거부된 경우 안내 메시지
-                Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
-            }
+        if (requestCode == CAMERA_PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            openCamera()
+        } else {
+            Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // 갤러리 및 카메라에서 이미지를 받아 처리하는 메서드
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -147,39 +127,54 @@ class AiPredictActivity : AppCompatActivity() {
             val requestFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", it.name, requestFile)
 
-            // MyApplication 인스턴스에서 apiService를 가져옴
-            val apiService = (application as MyApplication).getApiService()
+            Log.d("MainActivitySpring","test : " + body)
+            RetrofitClient.instance.uploadImage(body)
+                .enqueue(object : Callback<ClassificationResponse> {
+                    override fun onResponse(
+                        call: Call<ClassificationResponse>,
+                        response: Response<ClassificationResponse>
+                    ) {
+                        val rawJson = response.body()
+                        Log.d("MainActivitySpring", "서버 원본 JSON 응답: $rawJson")
 
-            apiService.predictImage(body).enqueue(object : Callback<PredictionResult> {
-                override fun onResponse(
-                    call: Call<PredictionResult>,
-                    response: Response<PredictionResult>
-                ) {
-                    if (response.isSuccessful) {
-                        val result = response.body()
-                        if (result != null) {
-                            Log.d("MainActivitySpring", "서버 응답 성공: $result")
+                        if (response.isSuccessful) {
+                            val result = response.body()
+                            if (result != null) {
+                                Log.d("MainActivitySpring", "서버 응답 성공: $result")
 
-                            val displayText = """
+
+                                val displayText = """
                                 Predicted Class: ${result.predictedLabel}
-                            """.trimIndent()
+                                
+                                """.trimIndent()
 
-                            resultTextView.text = displayText
+                                resultTextView.text = displayText
+                            } else {
+                                Log.d("MainActivitySpring", "서버 응답이 null입니다.")
+                                val errorBody = response.errorBody()?.string()
+                                Log.d("MainActivitySpring", "응답 에러: ${response.code()}, $errorBody")
+                                Toast.makeText(this@MainActivity, "응답을 가져오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
-                            Log.d("MainActivitySpring", "서버 응답이 null입니다.")
+                            val errorBody = response.errorBody()?.string()
+                            Log.d("MainActivitySpring", "응답 에러: ${response.code()}, $errorBody")
+                            Toast.makeText(
+                                this@MainActivity,
+                                "응답을 가져오는 데 실패했습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    } else {
-                        val errorBody = response.errorBody()?.string()
-                        Log.d("MainActivitySpring", "응답 에러: ${response.code()}, $errorBody")
                     }
-                }
 
-                override fun onFailure(call: Call<PredictionResult>, t: Throwable) {
-                    Log.d("MainActivitySpring", "서버 연결 실패: ${t.message}")
-                }
-            })
+                    override fun onFailure(call: Call<ClassificationResponse>, t: Throwable) {
+                        Log.d("MainActivitySpring", "서버 연결 실패: ${t.message}")
+                        Toast.makeText(this@MainActivity, "서버와 연결할 수 없습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
         } ?: run {
             Log.d("MainActivitySpring", "이미지 파일 변환 실패")
+            Toast.makeText(this, "이미지 파일 변환에 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 

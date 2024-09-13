@@ -14,7 +14,7 @@ class UserViewModel(private val apiService: INetworkService) : ViewModel() {
 
     val userPagingData: LiveData<PagingData<UserItem>> = Pager(
         config = PagingConfig(
-            pageSize = 10, // 한 페이지에 가져올 아이템 수
+            pageSize = 10,
             enablePlaceholders = false
         ),
         pagingSourceFactory = { UserPagingSource(apiService) }

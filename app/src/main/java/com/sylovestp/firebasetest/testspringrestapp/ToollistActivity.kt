@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.busanit501.androidlabtest501.R
 import com.sylovestp.firebasetest.testspringrestapp.dto.Tool
 import com.sylovestp.firebasetest.testspringrestapp.adapter.ToolAdapter
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
@@ -30,10 +31,10 @@ class ToollistActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // MyApplication 초기화
+
         myApplication = application as MyApplication
 
-        // 네트워크가 가능한지 확인 후 서버에서 도구 목록을 가져오는 작업 수행
+
         if (isNetworkAvailable(this)) {
             fetchToolsFromServer()
         } else {
@@ -48,7 +49,7 @@ class ToollistActivity : AppCompatActivity() {
         if (token != null) {
             val bearerToken = "Bearer $token"
 
-            // API 호출
+
             myApplication.getApiService().findAll(bearerToken)
                 .enqueue(object : Callback<List<Tool>> {
                     override fun onResponse(call: Call<List<Tool>>, response: Response<List<Tool>>) {
@@ -71,12 +72,12 @@ class ToollistActivity : AppCompatActivity() {
         }
     }
 
-    // API 응답 오류 처리
+
     private fun handleApiError(response: Response<*>) {
         when (response.code()) {
             401 -> {
                 Toast.makeText(this, "Unauthorized access. Please login again.", Toast.LENGTH_SHORT).show()
-                // 로그아웃 처리 및 로그인 화면으로 이동
+
                 redirectToLogin()
             }
             500 -> {
@@ -89,20 +90,20 @@ class ToollistActivity : AppCompatActivity() {
         }
     }
 
-    // 토큰이 없을 때 처리
+
     private fun handleMissingToken() {
         Toast.makeText(this, "Token not found, please login again", Toast.LENGTH_SHORT).show()
         redirectToLogin()
     }
 
-    // 로그인 화면으로 리다이렉트
+
     private fun redirectToLogin() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
-    // 네트워크 상태 확인
+
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork) ?: return false

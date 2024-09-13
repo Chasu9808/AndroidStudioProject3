@@ -8,11 +8,9 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
-import com.sylovestp.firebasetest.testspringrestapp.interceptor.AuthInterceptor
 import okhttp3.OkHttpClient
 import java.io.InputStream
 
-// glide로 이미지 로드 불러올 때, 헤더에 토큰 설정하는 코드
 @GlideModule
 class MyGlideModule : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {

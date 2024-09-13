@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.busanit501.androidlabtest501.R
 
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
 import okhttp3.ResponseBody
@@ -25,15 +26,15 @@ class MyPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page)
 
-        // MyApplication 초기화
+
         myApplication = application as MyApplication
 
-        // 버튼 초기화 및 클릭 이벤트 설정
+
         deleteButton = findViewById(R.id.button_delete_account)
 
         deleteButton.setOnClickListener {
             if (isNetworkAvailable(this)) {
-                deleteAccount()  // 계정 삭제 함수 호출
+                deleteAccount()
             } else {
                 Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
             }
@@ -47,7 +48,7 @@ class MyPageActivity : AppCompatActivity() {
         if (token != null) {
             val bearerToken = "Bearer $token"
 
-            // Retrofit 요청 시작
+
             myApplication.getApiService().deleteAccount(bearerToken)
                 .enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -81,7 +82,7 @@ class MyPageActivity : AppCompatActivity() {
         }
     }
 
-    // 네트워크 상태 확인
+
     private fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetwork ?: return false
