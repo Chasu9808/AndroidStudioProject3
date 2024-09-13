@@ -142,11 +142,7 @@ class MainActivity : AppCompatActivity() {
                             if (result != null) {
                                 Log.d("MainActivitySpring", "서버 응답 성공: $result")
 
-//                                val displayText = """
-//                                Predicted Class: ${result.predictedLabel}
-//                                videoUrl: ${result.videoUrl}
-//                                Class Confidences: ${result.classConfidences?.entries?.joinToString("\n") { entry -> "${entry.key}: ${entry.value}" }}
-//                                """.trimIndent()
+
                                 val displayText = """
                                 Predicted Class: ${result.predictedLabel}
                                 
