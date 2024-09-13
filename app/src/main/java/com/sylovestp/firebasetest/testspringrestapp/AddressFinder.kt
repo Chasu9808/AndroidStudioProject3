@@ -14,14 +14,15 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.Fragment
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
+import com.busanit501.androidlabtest501.R
 import java.util.function.Consumer
 
 class AddressFinder: Activity() {
     companion object {
-        private const val ACTION = "com.example.addressfinder.FINDER" // Implicit Intent 를 위한 action 값
+        private const val ACTION = "com.example.addressfinder.FINDER"
 
-        private const val JS_BRIDGE = "address_finder" // Javascript 와 통신하기 위한 브릿지 프로토콜
-        private const val DOMAIN = "address.finder.net" // 로컬 가상 도메인
+        private const val JS_BRIDGE = "address_finder"
+        private const val DOMAIN = "address.finder.net"
         private const val PATH = "assets"
 
         const val ADDRESS = "address"
@@ -40,11 +41,7 @@ class AddressFinder: Activity() {
 
         private var action: ((Bundle) -> Unit)? = null
 
-        /**
-         * Java 환경에서 호출하는 용도
-         *
-         * @param onComplete 콜백 받는 메소드
-         */
+
         @JvmStatic
         fun open(onComplete: Consumer<Bundle>) {
             callee(onComplete::accept)
@@ -52,11 +49,7 @@ class AddressFinder: Activity() {
             openInternal()
         }
 
-        /**
-         * Kotlin 환경에서 호출하는 용도
-         *
-         * @param onComplete 콜백 받는 메소드
-         */
+
         fun open(onComplete:(Bundle) -> Unit){
             callee(onComplete)
 
@@ -103,8 +96,7 @@ class AddressFinder: Activity() {
 
             addJavascriptInterface(JavascriptInterface(this@AddressFinder), JS_BRIDGE)
 
-            // Asset 에 있는 HTML 을 돌리기 위해서는 WebViewAssetLoader 가 필요하다.
-            // 해당 클래스는 androidx.webkit:webkit:1.8.0 을 사용하면 쓸 수 있다.
+
             val assetLoader = WebViewAssetLoader.Builder()
                 .addPathHandler("/${PATH}/", WebViewAssetLoader.AssetsPathHandler(this@AddressFinder))
                 .setDomain(DOMAIN)

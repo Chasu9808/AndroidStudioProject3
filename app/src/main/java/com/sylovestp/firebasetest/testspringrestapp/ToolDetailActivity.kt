@@ -29,7 +29,7 @@ class ToolDetailActivity : AppCompatActivity() {
         regDateTextView = findViewById(R.id.regDateTextView)
         modDateTextView = findViewById(R.id.modDateTextView)
 
-//        val toolImageView = intent.getStringExtra("imageFileName")
+
         val toolName = intent.getStringExtra("tool_name")
         val toolDescription = intent.getStringExtra("tool_description")
         val imgText = intent.getStringExtra("img_text")
@@ -53,10 +53,10 @@ class ToolDetailActivity : AppCompatActivity() {
             "공업가위" -> R.drawable.scissors
             "톱" -> R.drawable.saw
             "캘리퍼스" -> R.drawable.vernier_calipers
-            else -> R.drawable.ic_launcher_foreground  // 기본 이미지 설정
+            else -> R.drawable.ic_launcher_foreground
         }
 
-        // 이미지뷰에 이미지 설정
+
         toolImageView.setImageResource(imageResId)
 
 

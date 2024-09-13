@@ -69,7 +69,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" /> <!-- 임시 테스트 아이디 -->
+            android:exported="true" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />

@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityUserRecyclerViewBinding
+import com.busanit501.androidlabtest501.R
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityUserRecyclerViewVer2Binding
 import com.sylovestp.firebasetest.testspringrestapp.paging.adapter.UserAdapter
 import com.sylovestp.firebasetest.testspringrestapp.paging.viewModel.UserViewModel
@@ -48,6 +48,6 @@ class UserRecyclerViewVer2Activity : AppCompatActivity() {
             adapter.submitData(lifecycle, pagingData)
         })
 
-    }//onCreate
+    }
 
     }

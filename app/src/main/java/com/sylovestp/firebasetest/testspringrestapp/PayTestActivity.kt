@@ -5,7 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityJoinBinding
+import com.busanit501.androidlabtest501.R
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityPayTestBinding
 
 class PayTestActivity : AppCompatActivity() {
@@ -27,5 +27,5 @@ class PayTestActivity : AppCompatActivity() {
 
 
 
-    } //onCreate
+    }
 }

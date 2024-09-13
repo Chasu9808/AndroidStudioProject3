@@ -15,7 +15,6 @@ class LoginRepository(private val apiService: INetworkService, private val share
             val refreshToken = response.body()?.refreshToken
             val username = response.body()?.username
 
-            // JWT 토큰을 SharedPreferences에 저장
             sharedPreferences.edit().putString("jwt_token", accessToken).apply()
             sharedPreferences.edit().putString("refreshToken", refreshToken).apply()
             sharedPreferences.edit().putString("username", username).apply()
