@@ -3,15 +3,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@android:color/white"
+    android:padding="16dp"
+    android:gravity="center">
+
 
     <Button
         android:id="@+id/deleteAccountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Account"
-        android:background="@android:color/holo_red_light"
+        android:text="계정 삭제"
+        android:backgroundTint="@android:color/black"
         android:textColor="@android:color/white"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:textSize="18sp"
+        android:padding="12dp"/>
 </LinearLayout>
