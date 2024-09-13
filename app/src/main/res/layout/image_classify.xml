@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busanit501.androidstudioproject3.lhj.ImageClassfication">
+    android:background="@android:color/white"
+    tools:context="com.busanit501.androidstudioproject3.lhj.ImageClassification">
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -10,13 +12,19 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:contentDescription="Selected Image" />
+        android:contentDescription="Selected Image"
+        android:background="@drawable/image_border"
+        android:elevation="8dp"
+        android:scaleType="centerCrop"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/buttonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="카메라"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/black"
         android:layout_below="@id/imageView"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true" />
@@ -25,7 +33,9 @@
         android:id="@+id/buttonGallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="갤러리"
+        android:text="갤 러 리"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/black"
         android:layout_below="@id/buttonCamera"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />

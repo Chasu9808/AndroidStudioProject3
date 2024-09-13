@@ -27,7 +27,6 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 
-// 클래스 이름을 ImageClassfication에서 ImageClassification으로 수정
 class ImageClassification : AppCompatActivity() {
 
     private lateinit var imageView: ImageView

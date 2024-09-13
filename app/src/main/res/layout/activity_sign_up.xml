@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.busanit501.androidstudioproject3.lhj.SignUpActivity">
 
-    <!-- 회원가입에 필요한 필드들을 여기에 추가하세요. -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
