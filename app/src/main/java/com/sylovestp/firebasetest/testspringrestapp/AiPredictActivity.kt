@@ -59,17 +59,14 @@ class AiPredictActivity : AppCompatActivity() {
         }
     }
 
-
     private fun checkCameraPermissionAndOpenCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED
         ) {
-
+            // 권한이 거부된 경우에만 설명 표시
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
                 Toast.makeText(this, "카메라 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
-
             // 권한 요청
             ActivityCompat.requestPermissions(
                 this,
@@ -77,7 +74,7 @@ class AiPredictActivity : AppCompatActivity() {
                 CAMERA_PERMISSION_CODE
             )
         } else {
-
+            // 권한이 이미 부여된 경우 카메라 실행
             openCamera()
         }
     }
@@ -99,15 +96,14 @@ class AiPredictActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-
+                // 권한이 허용된 경우 카메라 실행
                 openCamera()
             } else {
-
+                // 권한이 거부된 경우
                 Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -146,7 +142,6 @@ class AiPredictActivity : AppCompatActivity() {
         file?.let {
             val requestFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", it.name, requestFile)
-
 
             val apiService = (application as MyApplication).getApiService()
 
