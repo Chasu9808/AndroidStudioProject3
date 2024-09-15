@@ -39,9 +39,9 @@ class AiPredictActivity : AppCompatActivity() {
         Log.d("MainActivitySpring", "onCreate 실행됨")
         setContentView(R.layout.activity_ai_predict)
 
-        // MyApplication 초기화
+
         val myApplication = applicationContext as MyApplication
-        myApplication.initialize(this)  // apiService 초기화
+        myApplication.initialize(this)
 
         imageView = findViewById(R.id.imageView)
         resultTextView = findViewById(R.id.resultTextView)
@@ -59,14 +59,14 @@ class AiPredictActivity : AppCompatActivity() {
         }
     }
 
-    // 권한 확인 및 요청 메서드
+
     private fun checkCameraPermissionAndOpenCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED
         ) {
-            // 카메라 권한이 없는 경우, 권한 요청
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                // 이전에 권한 요청을 거부한 경우, 왜 권한이 필요한지 설명하고 다시 요청
+
                 Toast.makeText(this, "카메라 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
 
@@ -77,7 +77,7 @@ class AiPredictActivity : AppCompatActivity() {
                 CAMERA_PERMISSION_CODE
             )
         } else {
-            // 권한이 이미 있는 경우 카메라 열기
+
             openCamera()
         }
     }
@@ -99,16 +99,16 @@ class AiPredictActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                // 권한이 허용된 경우 카메라 열기
+
                 openCamera()
             } else {
-                // 권한이 거부된 경우 안내 메시지
+
                 Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    // 갤러리 및 카메라에서 이미지를 받아 처리하는 메서드
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -147,7 +147,7 @@ class AiPredictActivity : AppCompatActivity() {
             val requestFile = it.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("image", it.name, requestFile)
 
-            // MyApplication 인스턴스에서 apiService를 가져옴
+
             val apiService = (application as MyApplication).getApiService()
 
             apiService.predictImage(body).enqueue(object : Callback<PredictionResult> {

@@ -35,13 +35,13 @@ class MyAdapterRetrofit(val context: Context, val datas: List<UserItem>?)
         binding.itemAddress.text = item?.address
 
         val imageUrl = "http://10.100.201.29:8080/api/users/${item?.id}/profileImage"
-//        val imageUrl = "http://192.168.219.200:8080/api/users/${item?.id}/profileImage"
+
         Glide.with(context)
 
-            .load(imageUrl)  // profileImageId는 URL 또는 리소스 ID일 수 있습니다
+            .load(imageUrl)
             .override(300,300)
-            .placeholder(R.drawable.test) // 이미지 로드 중에 표시할 플레이스홀더
-            .error(R.drawable.user_basic) // 로드 실패 시 표시할 이미지
+            .placeholder(R.drawable.test)
+            .error(R.drawable.user_basic)
             .into(binding.itemProfileImage)
     }
 

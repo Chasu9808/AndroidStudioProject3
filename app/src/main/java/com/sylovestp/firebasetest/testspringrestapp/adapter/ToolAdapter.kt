@@ -39,13 +39,6 @@ class ToolAdapter(
         holder.regDateTextView.text = tool.regDate
         holder.modDateTextView.text = tool.modDate
 
-//        val imageUrl = "http://10.100.201.26:8080/images/"+ tool.imageFileName
-//
-//        Glide.with(holder.itemView.context)
-//            .load(imageUrl)
-//            .placeholder(R.drawable.img) // 로딩 중 표시할 이미지
-//            .error(R.drawable.error_img)
-//            .into(holder.imageView)
         val imageName = when (tool.toolName) {
             "망치" -> R.drawable.hammer
             "니퍼" -> R.drawable.nipper
@@ -64,7 +57,7 @@ class ToolAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ToolDetailActivity::class.java).apply {
-//                putExtra("imageFileName", tool.imageFileName)
+
                 putExtra("tool_id", tool.id)
                 putExtra("tool_name", tool.toolName)
                 putExtra("tool_description", tool.description)

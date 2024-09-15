@@ -41,7 +41,7 @@ class JoinActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var binding: ActivityJoinBinding
     private var imageUri: Uri? = null  // Nullable URI
-    // ActivityResultLauncher 선언
+
     private lateinit var addressFinderLauncher: ActivityResultLauncher<Bundle>
 
     private val selectImageLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -49,12 +49,10 @@ class JoinActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             imageUri = result.data?.data!!
-//            imageView.setImageURI(imageUri)
-            // 코너 반경 (px 단위)
-//            val cornerRadius = 500
 
 
-// 이미지 로드 및 코너 둥글게 적용
+
+
             Glide.with(this)
                 .load(imageUri) // 이미지 URL 또는 로컬 리소스
                 .apply(RequestOptions().circleCrop())
@@ -96,8 +94,7 @@ class JoinActivity : AppCompatActivity() {
             val userDTO = UserDTO(username,name,password,email,phone,fullAddress)
             Toast.makeText(this@JoinActivity, "${username}, ${password},${email}, ${imageUri}", Toast.LENGTH_SHORT).show()
             if (userDTO != null) {
-                // 회원가입시,
-                //
+
                 imageUri?.let { it1 -> processImage(userDTO, it1) }
             }
         }
@@ -109,19 +106,19 @@ class JoinActivity : AppCompatActivity() {
         }
 
 
-        // ActivityResultLauncher 등록
+
         addressFinderLauncher = registerForActivityResult(AddressFinder.contract) { result ->
             if (result != Bundle.EMPTY) {
-                // address와 zipcode 값을 받아온 후 처리
+
                 val address = result.getString(AddressFinder.ADDRESS)
                 val zipCode = result.getString(AddressFinder.ZIPCODE)
                 val editableText: Editable = Editable.Factory.getInstance().newEditable("[$zipCode] $address")
-                // 받은 데이터를 사용해 필요한 작업 수행
+
                 binding.userAddress.text = editableText
             }
         }
 
-        // 버튼 클릭 리스너 설정
+
         binding.findAddressBtn.setOnClickListener {
             // AddressFinder 액티비티 시작
             addressFinderLauncher.launch(Bundle())
@@ -129,7 +126,7 @@ class JoinActivity : AppCompatActivity() {
 
 
 
-    } //onCreate
+    }
 
     private fun uploadData(user: RequestBody, profileImage: MultipartBody.Part?) {
         val networkService = (applicationContext as MyApplication).networkService
@@ -171,15 +168,15 @@ class JoinActivity : AppCompatActivity() {
     private fun processImage(userDTO: UserDTO, uri: Uri) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                // 1. JSON 데이터 생성
+
                 val userRequestBody = createRequestBodyFromDTO(userDTO)
 
-                // 2. 이미지 축소 및 MultipartBody.Part 생성
+
                 val resizedBitmap = getResizedBitmap(uri, 200, 200) // 200x200 크기로 축소
                 val imageBytes = bitmapToByteArray(resizedBitmap)
                 val profileImagePart = createMultipartBodyFromBytes(imageBytes)
 
-                // 3. 서버로 전송
+
                 uploadData(userRequestBody, profileImagePart)
 
                 withContext(Dispatchers.Main) {
@@ -199,10 +196,10 @@ class JoinActivity : AppCompatActivity() {
             val futureTarget: FutureTarget<Bitmap> = Glide.with(this@JoinActivity)
                 .asBitmap()
                 .load(uri)
-                .override(width, height)  // 지정된 크기로 축소
+                .override(width, height)
                 .submit()
 
-            // Bitmap을 반환
+
             futureTarget.get()
         }
     }

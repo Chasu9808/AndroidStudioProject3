@@ -25,14 +25,14 @@ interface INetworkService {
     @Multipart
     @POST("/classify")
     fun predictImage(
-        @Part image: MultipartBody.Part? = null    // 파일 데이터 (Optional)
+        @Part image: MultipartBody.Part? = null
     ): Call<PredictionResult>
 
     @Multipart
     @POST("/public/users")
     fun registerUser(
-        @Part("user") user: RequestBody,          // JSON 데이터
-        @Part profileImage: MultipartBody.Part? = null    // 파일 데이터 (Optional)
+        @Part("user") user: RequestBody,
+        @Part profileImage: MultipartBody.Part? = null
     ): Call<ResponseBody>
 
     @POST("/generateToken")
@@ -57,6 +57,4 @@ interface INetworkService {
     fun findAll(@Header("Authorization") token: String): Call<List<Tool>>
 
 
-//    @GET("api/tools/detail/{id}")
-//    fun findById(@Path("id") id: Long): Call<Tool>
 }

@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.sylovestp.firebasetest.testspringrestapp.R
+
 
 
 class ToolDetailActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class ToolDetailActivity : AppCompatActivity() {
         regDateTextView = findViewById(R.id.regDateTextView)
         modDateTextView = findViewById(R.id.modDateTextView)
 
-//        val toolImageView = intent.getStringExtra("imageFileName")
+
         val toolName = intent.getStringExtra("tool_name")
         val toolDescription = intent.getStringExtra("tool_description")
         val imgText = intent.getStringExtra("img_text")

@@ -13,11 +13,9 @@ class MyApplication : Application(){
     private lateinit var retrofit_token: Retrofit
     private lateinit var apiService: INetworkService
 
-    // http 퍼미션 허용 및, 로컬호스트 안될시 아이피로 확인 하기.
-    val BASE_URL = "http://10.100.201.29:8080"
-//    val BASE_URL = "http://192.168.219.200:8080"
 
-    //add....................................
+    val BASE_URL = "http://192.168.219.100:8080"
+
     var networkService: INetworkService
 
 
@@ -27,7 +25,7 @@ class MyApplication : Application(){
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    // 토큰 가져오기 작업
+
     fun initialize(context: Context) {
         val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
@@ -47,13 +45,6 @@ class MyApplication : Application(){
     fun getApiService(): INetworkService {
         return apiService
     }
-
-    //사용법
-    //
-    // MyApplication 클래스의 인스턴스를 가져옵니다.
-//    val myApplication = applicationContext as MyApplication
-//    myApplication.initialize(this)
-//    val apiService = myApplication.getApiService()
 
     init {
         networkService = retrofit.create(INetworkService::class.java)

@@ -11,9 +11,9 @@ class UserPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserItem> {
         return try {
-            // 처음 시작할 페이지를 0으로 설정
+
             val currentPage = params.key ?: 0
-            // 페이지 크기를 10으로 설정
+
             val response = apiService.getItems2(currentPage, 10)
 
             if (response.isSuccessful) {
