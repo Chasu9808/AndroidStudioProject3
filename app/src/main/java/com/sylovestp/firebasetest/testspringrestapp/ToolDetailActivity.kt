@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.sylovestp.firebasetest.testspringrestapp.R
+
 
 
 class ToolDetailActivity : AppCompatActivity() {
@@ -53,10 +53,10 @@ class ToolDetailActivity : AppCompatActivity() {
             "공업가위" -> R.drawable.scissors
             "톱" -> R.drawable.saw
             "캘리퍼스" -> R.drawable.vernier_calipers
-            else -> R.drawable.ic_launcher_foreground
+            else -> R.drawable.ic_launcher_foreground  // 기본 이미지 설정
         }
 
-
+        // 이미지뷰에 이미지 설정
         toolImageView.setImageResource(imageResId)
 
 

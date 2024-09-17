@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.busanit501.androidlabtest501.R
 import com.sylovestp.firebasetest.testspringrestapp.dto.Tool
 import com.sylovestp.firebasetest.testspringrestapp.adapter.ToolAdapter
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
@@ -95,7 +94,6 @@ class ToollistActivity : AppCompatActivity() {
         Toast.makeText(this, "Token not found, please login again", Toast.LENGTH_SHORT).show()
         redirectToLogin()
     }
-
 
     private fun redirectToLogin() {
         val intent = Intent(this, MainActivity::class.java)

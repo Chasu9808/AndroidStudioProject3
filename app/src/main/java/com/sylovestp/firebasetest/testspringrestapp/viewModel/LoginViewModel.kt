@@ -1,3 +1,5 @@
+package com.sylovestp.firebasetest.testspringrestapp.viewModel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +20,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
             if (loginSuccessful) {
                 _loginUser.postValue(username)
+            } else {
                 _loginUser.postValue(null)
             }
         }

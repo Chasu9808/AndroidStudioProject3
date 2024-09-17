@@ -15,6 +15,7 @@ class LoginRepository(private val apiService: INetworkService, private val share
             val refreshToken = response.body()?.refreshToken
             val username = response.body()?.username
 
+
             sharedPreferences.edit().putString("jwt_token", accessToken).apply()
             sharedPreferences.edit().putString("refreshToken", refreshToken).apply()
             sharedPreferences.edit().putString("username", username).apply()

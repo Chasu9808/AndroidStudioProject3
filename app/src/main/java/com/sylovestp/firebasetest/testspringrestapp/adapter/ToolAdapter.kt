@@ -39,7 +39,6 @@ class ToolAdapter(
         holder.regDateTextView.text = tool.regDate
         holder.modDateTextView.text = tool.modDate
 
-
         val imageName = when (tool.toolName) {
             "망치" -> R.drawable.hammer
             "니퍼" -> R.drawable.nipper
@@ -58,6 +57,7 @@ class ToolAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ToolDetailActivity::class.java).apply {
+
                 putExtra("tool_id", tool.id)
                 putExtra("tool_name", tool.toolName)
                 putExtra("tool_description", tool.description)

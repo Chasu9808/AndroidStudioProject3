@@ -6,6 +6,7 @@ data class UserItem(
     val name: String,
     val email: String,
     val password: String,
+
     val profileImageId: String,
     val phone: String,
     val address: String,

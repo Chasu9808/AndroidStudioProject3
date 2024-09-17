@@ -17,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.FutureTarget
 import com.bumptech.glide.request.RequestOptions
-import com.busanit501.androidlabtest501.R
 import com.google.gson.Gson
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityJoinBinding
 import com.sylovestp.firebasetest.testspringrestapp.dto.UserDTO
@@ -41,7 +40,8 @@ class JoinActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
     private lateinit var binding: ActivityJoinBinding
-    private var imageUri: Uri? = null
+    private var imageUri: Uri? = null  // Nullable URI
+
     private lateinit var addressFinderLauncher: ActivityResultLauncher<Bundle>
 
     private val selectImageLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -50,8 +50,11 @@ class JoinActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             imageUri = result.data?.data!!
 
+
+
+
             Glide.with(this)
-                .load(imageUri)
+                .load(imageUri) // 이미지 URL 또는 로컬 리소스
                 .apply(RequestOptions().circleCrop())
                 .into(imageView)
         }
@@ -110,13 +113,14 @@ class JoinActivity : AppCompatActivity() {
                 val address = result.getString(AddressFinder.ADDRESS)
                 val zipCode = result.getString(AddressFinder.ZIPCODE)
                 val editableText: Editable = Editable.Factory.getInstance().newEditable("[$zipCode] $address")
+
                 binding.userAddress.text = editableText
             }
         }
 
 
         binding.findAddressBtn.setOnClickListener {
-
+            // AddressFinder 액티비티 시작
             addressFinderLauncher.launch(Bundle())
         }
 
@@ -168,7 +172,7 @@ class JoinActivity : AppCompatActivity() {
                 val userRequestBody = createRequestBodyFromDTO(userDTO)
 
 
-                val resizedBitmap = getResizedBitmap(uri, 200, 200)
+                val resizedBitmap = getResizedBitmap(uri, 200, 200) // 200x200 크기로 축소
                 val imageBytes = bitmapToByteArray(resizedBitmap)
                 val profileImagePart = createMultipartBodyFromBytes(imageBytes)
 
@@ -202,7 +206,7 @@ class JoinActivity : AppCompatActivity() {
 
     fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream) // 압축 품질을 80%로 설정
         return byteArrayOutputStream.toByteArray()
     }
 

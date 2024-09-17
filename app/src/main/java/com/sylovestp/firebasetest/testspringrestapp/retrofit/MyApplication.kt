@@ -14,8 +14,7 @@ class MyApplication : Application(){
     private lateinit var apiService: INetworkService
 
 
-    val BASE_URL = "http://10.100.201.29:8080"
-
+    val BASE_URL = "http://192.168.219.100:8080"
 
     var networkService: INetworkService
 
@@ -46,8 +45,6 @@ class MyApplication : Application(){
     fun getApiService(): INetworkService {
         return apiService
     }
-
-
 
     init {
         networkService = retrofit.create(INetworkService::class.java)

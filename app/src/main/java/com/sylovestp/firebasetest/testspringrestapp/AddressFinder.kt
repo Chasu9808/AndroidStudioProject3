@@ -14,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.Fragment
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
-import com.busanit501.androidlabtest501.R
 import java.util.function.Consumer
 
 class AddressFinder: Activity() {

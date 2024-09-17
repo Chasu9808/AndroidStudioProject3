@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.busanit501.androidlabtest501.R
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityUserRecyclerViewBinding
 import com.sylovestp.firebasetest.testspringrestapp.dto.PageResponse
 import com.sylovestp.firebasetest.testspringrestapp.dto.UserItem
@@ -35,6 +34,7 @@ class UserRecyclerViewActivity : AppCompatActivity() {
         }
 
 
+
         val myApplication = applicationContext as MyApplication
         myApplication.initialize(this)
         apiService = myApplication.getApiService()
@@ -59,7 +59,6 @@ class UserRecyclerViewActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<PageResponse<UserItem>>, t: Throwable) {
-
 
                 call.cancel()
             }

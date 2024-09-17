@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- 상단 옵션 버튼 -->
+
         <ImageButton
             android:id="@+id/btnOptions"
             android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp" />
 
-        <!-- 공구 대표 이미지 설정을 위한 ImageView -->
+
         <ImageView
             android:id="@+id/toolImageView"
             android:layout_width="0dp"
@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnOptions" />
 
-        <!-- 환영 메시지 TextView (초기에는 숨겨짐) -->
+
         <TextView
             android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"/>
 
-        <!-- ID 입력을 위한 EditText -->
+
         <EditText
             android:id="@+id/etId"
             android:layout_width="0dp"
@@ -72,7 +72,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"/>
 
-        <!-- 비밀번호 입력을 위한 EditText -->
+
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="0dp"
@@ -90,7 +90,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"/>
 
-        <!-- 로그인 버튼 -->
+
 
         <Button
             android:id="@+id/btnLogin"
@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
 
 
-        <!-- 회원가입 버튼 -->
+
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="103dp"

@@ -1,6 +1,6 @@
 package com.sylovestp.firebasetest.testspringrestapp
 
-import LoginViewModel
+import com.sylovestp.firebasetest.testspringrestapp.viewModel.LoginViewModel
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.busanit501.androidlabtest501.R
 
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityMainBinding
 import com.sylovestp.firebasetest.testspringrestapp.repository.LoginRepository
@@ -47,14 +46,16 @@ class MainActivity : AppCompatActivity() {
 
         val savedUsername = sharedPreferences.getString("username", null)
 
-
         if (savedUsername != null) {
 
             showWelcomeMessage(binding, savedUsername)
             setupOptionsMenu(binding)
+            binding.btnLogout.visibility = View.VISIBLE
+            binding.btnSignUp.visibility = View.GONE
         } else {
 
             Toast.makeText(this, "로그인 후 옵션 메뉴를 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            binding.btnLogout.visibility = View.GONE
         }
 
 
@@ -62,21 +63,17 @@ class MainActivity : AppCompatActivity() {
             val username = binding.etId.text.toString()
             val password = binding.etPassword.text.toString()
 
-
             loginViewModel.login(username, password)
         }
 
 
         loginViewModel.loginUser.observe(this) { username ->
             if (username != null) {
-
                 sharedPreferences.edit().putString("username", username).apply()
 
 
                 showWelcomeMessage(binding, username)
                 setupOptionsMenu(binding)
-
-
                 binding.btnLogout.visibility = View.VISIBLE
                 binding.btnSignUp.visibility = View.GONE
             } else {
@@ -98,8 +95,6 @@ class MainActivity : AppCompatActivity() {
             binding.btnLogout.visibility = View.GONE
 
             Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
-
-            sharedPreferences.edit().clear().apply()
         }
 
 
@@ -157,6 +152,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-
-

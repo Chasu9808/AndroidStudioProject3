@@ -1,7 +1,9 @@
 package com.sylovestp.firebasetest.testspringrestapp.paging.adapter
 
 import android.view.LayoutInflater
+
 import android.view.ViewGroup
+
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +36,7 @@ class UserAdapter : PagingDataAdapter<UserItem, UserAdapter.UserViewHolder>(DIFF
             binding.itemAddress.text = user.address
 
             val imageUrl = "http://10.100.201.87:8080/api/users/${user.id}/profileImage"
+
             Glide.with(binding.root.context)
                 .load(imageUrl)
                 .placeholder(R.drawable.user_basic)
