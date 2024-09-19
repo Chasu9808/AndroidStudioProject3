@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -155,11 +156,15 @@ class AiPredictActivity : AppCompatActivity() {
                         if (result != null) {
                             Log.d("MainActivitySpring", "서버 응답 성공: $result")
 
-                            val displayText = """
-                                Predicted Class: ${result.predictedLabel}
-                            """.trimIndent()
+                            val displayText = "Predicted Class: ${result.predictedLabel}\nDescription: ${result.description}"
 
                             resultTextView.text = displayText
+
+                            val videoView: WebView = findViewById(R.id.videoWebView)
+                            val videoUrl = "<iframe width=\"100%\" height=\"315\" src=\"${result.videoUrl}\" frameborder=\"0\" allowfullscreen></iframe>"
+                            videoView.settings.javaScriptEnabled = true
+                            videoView.loadData(videoUrl, "text/html", "utf-8")
+
                         } else {
                             Log.d("MainActivitySpring", "서버 응답이 null입니다.")
                         }
