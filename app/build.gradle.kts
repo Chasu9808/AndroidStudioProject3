@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.mediation.test.suite)
     implementation(libs.androidx.media3.common)
+
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")

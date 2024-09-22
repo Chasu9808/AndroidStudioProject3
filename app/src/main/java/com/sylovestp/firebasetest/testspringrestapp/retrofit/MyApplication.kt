@@ -14,7 +14,7 @@ class MyApplication : Application(){
     private lateinit var apiService: INetworkService
 
 
-    val BASE_URL = "http://192.168.219.100:8080"
+    val BASE_URL = "http://10.100.201.52:8080"
 
     var networkService: INetworkService
 
