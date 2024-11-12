@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp") version "1.9.20-1.0.14"
-//    id("kotlin-kapt")
 }
 
 android {
@@ -13,8 +12,8 @@ android {
         applicationId = "com.sylovestp.firebasetest.testspringrestapp"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -62,7 +61,6 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.7.2")
 
     implementation("androidx.fragment:fragment-ktx:1.3.6")
-//    kapt("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.12.0")
     implementation("androidx.webkit:webkit:1.8.0")
 
@@ -75,10 +73,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-
-// kapt 모듈 접근 권한 추가
-//kapt {
-//    javacOptions {
-//        option("-J--add-exports", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
-//    }
-//}
