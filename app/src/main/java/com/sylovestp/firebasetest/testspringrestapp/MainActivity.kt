@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                             true
                         }
-                        R.id.action_my_page -> {
+                        R.id.action_mypage -> {
                             val intent = Intent(this, MyPageActivity::class.java)
                             startActivity(intent)
                             true

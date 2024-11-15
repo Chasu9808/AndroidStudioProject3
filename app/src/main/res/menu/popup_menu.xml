@@ -4,7 +4,7 @@
         android:id="@+id/action_image_classification"
         android:title="이미지분석" />
     <item
-        android:id="@+id/action_my_page"
+        android:id="@+id/action_mypage"
         android:title="마이페이지"/>
     <item
         android:id="@+id/action_tool_list"
