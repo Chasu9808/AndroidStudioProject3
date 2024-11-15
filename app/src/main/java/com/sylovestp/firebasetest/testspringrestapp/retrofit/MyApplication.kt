@@ -7,24 +7,21 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MyApplication : Application(){
+class MyApplication : Application() {
 
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var retrofit_token: Retrofit
     private lateinit var apiService: INetworkService
 
-
-    val BASE_URL = "http://192.168.219.100:8080"
+    val BASE_URL = "http://172.30.1.76:8080"
 
     var networkService: INetworkService
-
 
     val retrofit: Retrofit
         get() = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
 
     fun initialize(context: Context) {
         val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)

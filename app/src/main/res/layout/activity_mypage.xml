@@ -1,0 +1,51 @@
+<!-- res/layout/activity_mypage.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 사용자 정보 표시 영역 -->
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email" />
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone" />
+
+    <!-- 정보 수정 버튼 -->
+    <Button
+        android:id="@+id/btnEditInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Information" />
+
+    <!-- 비밀번호 변경 버튼 -->
+    <Button
+        android:id="@+id/btnChangePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password" />
+
+    <!-- 계정 삭제 버튼 -->
+    <Button
+        android:id="@+id/btnDeleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:textColor="@android:color/holo_red_dark" />
+
+</LinearLayout>

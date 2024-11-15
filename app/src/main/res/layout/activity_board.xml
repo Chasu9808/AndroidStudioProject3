@@ -1,0 +1,35 @@
+<!-- res/layout/activity_board.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 검색 입력 필드 -->
+    <EditText
+        android:id="@+id/etSearchKeyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search Boards" />
+
+    <!-- 검색 버튼 -->
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
+    <!-- 게시판 리스트를 표시하는 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBoardList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 게시글 작성 버튼 -->
+    <Button
+        android:id="@+id/btnCreateBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Board" />
+</LinearLayout>

@@ -1,0 +1,27 @@
+<!-- res/layout/activity_comment.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 댓글 리스트를 표시하는 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCommentList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 댓글 입력 필드 -->
+    <EditText
+        android:id="@+id/etComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write a comment" />
+
+    <!-- 댓글 작성 버튼 -->
+    <Button
+        android:id="@+id/btnAddComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Comment" />
+</LinearLayout>
