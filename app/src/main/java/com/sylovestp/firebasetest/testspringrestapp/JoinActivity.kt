@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -21,40 +22,27 @@ import com.google.gson.Gson
 import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityJoinBinding
 import com.sylovestp.firebasetest.testspringrestapp.dto.UserDTO
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.ByteArrayOutputStream
-
 
 class JoinActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
     private lateinit var binding: ActivityJoinBinding
-    private var imageUri: Uri? = null  // Nullable URI
+    private var imageUri: Uri? = null
 
     private lateinit var addressFinderLauncher: ActivityResultLauncher<Bundle>
-
     private val selectImageLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            imageUri = result.data?.data!!
-
-
-
-
+            imageUri = result.data?.data
             Glide.with(this)
-                .load(imageUri) // 이미지 URL 또는 로컬 리소스
+                .load(imageUri)
                 .apply(RequestOptions().circleCrop())
                 .into(imageView)
         }
@@ -68,88 +56,87 @@ class JoinActivity : AppCompatActivity() {
 
         imageView = binding.userProfile
 
-
-
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        binding.userProfile.setOnClickListener {
-            openGallery()
-        }
-
-
-        binding.joinBtn.setOnClickListener {
-            val username = binding.userUsername.text.toString()
-            val name = binding.userName.text.toString()
-            val password = binding.userPassword1.text.toString()
-            val email = binding.userEmail.text.toString()
-            val phone = binding.userPhone.text.toString()
-            val address = binding.userAddress.text.toString()
-            val detailAddress = binding.userAddressDetail.text.toString()
-            val fullAddress =  address + " " + detailAddress
-            val userDTO = UserDTO(username,name,password,email,phone,fullAddress)
-            Toast.makeText(this@JoinActivity, "${username}, ${password},${email}, ${imageUri}", Toast.LENGTH_SHORT).show()
-            if (userDTO != null) {
-
-                imageUri?.let { it1 -> processImage(userDTO, it1) }
-            }
-        }
-
+        binding.userProfile.setOnClickListener { openGallery() }
+        binding.joinBtn.setOnClickListener { registerUser() }
         binding.loginBtn.setOnClickListener {
-            val intent = Intent(this@JoinActivity, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-
-
         addressFinderLauncher = registerForActivityResult(AddressFinder.contract) { result ->
             if (result != Bundle.EMPTY) {
-
                 val address = result.getString(AddressFinder.ADDRESS)
                 val zipCode = result.getString(AddressFinder.ZIPCODE)
-                val editableText: Editable = Editable.Factory.getInstance().newEditable("[$zipCode] $address")
-
+                val editableText: Editable =
+                    Editable.Factory.getInstance().newEditable("[$zipCode] $address")
                 binding.userAddress.text = editableText
             }
         }
 
+        binding.findAddressBtn.setOnClickListener { addressFinderLauncher.launch(Bundle()) }
+    }
 
-        binding.findAddressBtn.setOnClickListener {
-            // AddressFinder 액티비티 시작
-            addressFinderLauncher.launch(Bundle())
+    private fun registerUser() {
+        val username = binding.userUsername.text.toString()
+        val name = binding.userName.text.toString()
+        val password = binding.userPassword1.text.toString()
+        val email = binding.userEmail.text.toString()
+        val phone = binding.userPhone.text.toString()
+        val address = binding.userAddress.text.toString()
+        val detailAddress = binding.userAddressDetail.text.toString()
+        val fullAddress = "$address $detailAddress"
+        val userDTO = UserDTO(username, name, password, email, phone, fullAddress)
+
+        if (username.isNotBlank() && password.isNotBlank() && email.isNotBlank()) {
+            imageUri?.let { uri -> processImage(userDTO, uri) }
+                ?: run { uploadData(createRequestBodyFromDTO(userDTO), null) }
+        } else {
+            Toast.makeText(this, "모든 필드를 입력해주세요.", Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
 
     private fun uploadData(user: RequestBody, profileImage: MultipartBody.Part?) {
         val networkService = (applicationContext as MyApplication).networkService
-        val call = networkService.registerUser(user, profileImage)
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(this@JoinActivity, "User created successfully", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@JoinActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this@JoinActivity, "Failed to create user: ${response.code()}", Toast.LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = networkService.registerUser(user, profileImage).execute()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@JoinActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                        navigateToMainActivity()
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        Log.e("JoinActivity", "회원가입 실패: ${response.code()} $errorBody")
+                        Toast.makeText(
+                            this@JoinActivity,
+                            "회원가입 실패: ${response.code()} - ${errorBody ?: "알 수 없는 오류"}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("JoinActivity", "네트워크 오류: ${e.message}")
+                    Toast.makeText(this@JoinActivity, "네트워크 오류: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Toast.makeText(this@JoinActivity, "Request failed: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        }
     }
 
-    fun createRequestBodyFromDTO(userDTO: UserDTO): RequestBody {
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun createRequestBodyFromDTO(userDTO: UserDTO): RequestBody {
         val gson = Gson()
         val json = gson.toJson(userDTO)
         return json.toRequestBody("application/json".toMediaTypeOrNull())
@@ -166,26 +153,16 @@ class JoinActivity : AppCompatActivity() {
     }
 
     private fun processImage(userDTO: UserDTO, uri: Uri) {
-        GlobalScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
-
-                val userRequestBody = createRequestBodyFromDTO(userDTO)
-
-
-                val resizedBitmap = getResizedBitmap(uri, 200, 200) // 200x200 크기로 축소
+                val resizedBitmap = getResizedBitmap(uri, 200, 200)
                 val imageBytes = bitmapToByteArray(resizedBitmap)
                 val profileImagePart = createMultipartBodyFromBytes(imageBytes)
-
-
-                uploadData(userRequestBody, profileImagePart)
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@JoinActivity, "Image processed successfully", Toast.LENGTH_SHORT).show()
-                }
+                uploadData(createRequestBodyFromDTO(userDTO), profileImagePart)
             } catch (e: Exception) {
-                e.printStackTrace()
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@JoinActivity, "Error processing image", Toast.LENGTH_SHORT).show()
+                    Log.e("JoinActivity", "이미지 처리 실패: ${e.message}")
+                    Toast.makeText(this@JoinActivity, "이미지 처리 실패", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -198,17 +175,13 @@ class JoinActivity : AppCompatActivity() {
                 .load(uri)
                 .override(width, height)
                 .submit()
-
-
             futureTarget.get()
         }
     }
 
-    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+    private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream) // 압축 품질을 80%로 설정
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
         return byteArrayOutputStream.toByteArray()
     }
-
-
 }

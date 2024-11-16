@@ -10,7 +10,6 @@ import retrofit2.http.*
 
 interface INetworkService {
 
-    // 기존 기능 유지
     @Multipart
     @POST("/classify")
     fun predictImage(
@@ -27,9 +26,6 @@ interface INetworkService {
     @POST("/generateToken")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    @DELETE("api/users/mypage/deleteAccount")
-    fun deleteAccount(@Header("Authorization") token: String): Call<ResponseBody>
-
     @GET("/api/users/page")
     fun getItems(
         @Query("page") page: Int,
@@ -45,9 +41,9 @@ interface INetworkService {
     @GET("api/tools/list")
     fun findAll(@Header("Authorization") token: String): Call<List<Tool>>
 
-    // 수정된 MyPage 기능
+    // MyPage 관련 메서드
     @GET("/api/users/mypage")
-    fun getMyPage(@Header("Authorization") token: String): Call<UserItem>
+    fun getMyPage(@Header("Authorization") token: String): Call<UserDTO>
 
     @PUT("/api/users/mypage/edit")
     fun editUserField(
@@ -55,19 +51,20 @@ interface INetworkService {
         @Body updates: Map<String, String>
     ): Call<ResponseBody>
 
-    @PUT("/api/users/mypage/changePassword")
+    @POST("/api/users/mypage/changePassword")
     fun changePassword(
         @Header("Authorization") token: String,
-        @Body passwords: Map<String, String>
+        @Body passwordDetails: PasswordChangeRequest
     ): Call<ResponseBody>
 
-    @DELETE("/api/users/mypage/deleteAccount")
+    @POST("/api/users/mypage/deleteAccount")
     fun deleteAccount(
         @Header("Authorization") token: String,
-        @Query("password") password: String
+        @Body passwordDetails: Map<String, String>
     ): Call<ResponseBody>
 
-    // Board 관련 기능
+
+    // Board 관련 메서드
     @GET("/api/boards")
     fun getAllBoards(
         @Header("Authorization") token: String,
@@ -91,8 +88,7 @@ interface INetworkService {
     @PUT("/api/boards/update")
     fun updateBoard(
         @Header("Authorization") token: String,
-        @Body boardDto: BoardDto,
-        @Part file: MultipartBody.Part?
+        @Body boardDto: BoardDto
     ): Call<ResponseBody>
 
     @DELETE("/api/boards/{id}")
@@ -101,7 +97,7 @@ interface INetworkService {
         @Path("id") id: Long
     ): Call<ResponseBody>
 
-    // Comment 관련 기능
+    // Comment 관련 메서드
     @POST("/api/comments/create/{boardId}")
     fun createComment(
         @Header("Authorization") token: String,

@@ -1,14 +1,14 @@
-package com.sylovestp.firebasetest.testspringrestapp.ui
+package com.sylovestp.firebasetest.testspringrestapp
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sylovestp.firebasetest.testspringrestapp.R
 import com.sylovestp.firebasetest.testspringrestapp.dto.BoardDto
 import com.sylovestp.firebasetest.testspringrestapp.dto.PageResponse
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
+import com.sylovestp.firebasetest.testspringrestapp.ui.BoardAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
