@@ -18,8 +18,6 @@ import com.sylovestp.firebasetest.testspringrestapp.databinding.ActivityMainBind
 import com.sylovestp.firebasetest.testspringrestapp.repository.LoginRepository
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.INetworkService
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
-import com.sylovestp.firebasetest.testspringrestapp.ui.BoardActivity
-import com.sylovestp.firebasetest.testspringrestapp.ui.MyPageActivity
 import com.sylovestp.firebasetest.testspringrestapp.viewModel.LoginViewModel
 import com.sylovestp.firebasetest.testspringrestapp.viewModelFactory.LoginViewModelFactory
 

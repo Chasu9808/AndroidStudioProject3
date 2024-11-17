@@ -1,35 +1,63 @@
-<!-- res/layout/activity_board.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- 검색 입력 필드 -->
-    <EditText
-        android:id="@+id/etSearchKeyword"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search Boards" />
+        android:orientation="vertical">
 
-    <!-- 검색 버튼 -->
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search" />
+        <TextView
+            android:id="@+id/boardListTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="#EEEEEE"
+            android:textSize="14sp"
+            android:scrollbars="vertical" />
 
-    <!-- 게시판 리스트를 표시하는 RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBoardList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <EditText
+            android:id="@+id/boardTitleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Board Title" />
 
-    <!-- 게시글 작성 버튼 -->
-    <Button
-        android:id="@+id/btnCreateBoard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create New Board" />
-</LinearLayout>
+        <EditText
+            android:id="@+id/boardContentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Board Content" />
+
+        <Button
+            android:id="@+id/addBoardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Board" />
+
+        <Button
+            android:id="@+id/updateBoardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Board" />
+
+        <Button
+            android:id="@+id/deleteBoardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Board" />
+
+        <EditText
+            android:id="@+id/commentContentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Comment Content" />
+
+        <Button
+            android:id="@+id/addCommentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Comment" />
+    </LinearLayout>
+</ScrollView>
