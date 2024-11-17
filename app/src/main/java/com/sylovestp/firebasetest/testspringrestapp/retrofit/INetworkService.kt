@@ -1,12 +1,30 @@
 package com.sylovestp.firebasetest.testspringrestapp.retrofit
 
-import com.sylovestp.firebasetest.testspringrestapp.dto.*
+import com.sylovestp.firebasetest.testspringrestapp.dto.BoardDto
+import com.sylovestp.firebasetest.testspringrestapp.dto.CommentDto
+import com.sylovestp.firebasetest.testspringrestapp.dto.LoginRequest
+import com.sylovestp.firebasetest.testspringrestapp.dto.LoginResponse
+import com.sylovestp.firebasetest.testspringrestapp.dto.PageResponse
+import com.sylovestp.firebasetest.testspringrestapp.dto.PasswordChangeRequest
+import com.sylovestp.firebasetest.testspringrestapp.dto.PredictionResult
+import com.sylovestp.firebasetest.testspringrestapp.dto.Tool
+import com.sylovestp.firebasetest.testspringrestapp.dto.UserDTO
+import com.sylovestp.firebasetest.testspringrestapp.dto.UserItem
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface INetworkService {
 
@@ -64,57 +82,64 @@ interface INetworkService {
     ): Call<ResponseBody>
 
 
-    // Board 관련 메서드
+    // Board 관련 API
     @GET("/api/boards")
-    fun getAllBoards(
+    suspend fun getAllBoards(
         @Header("Authorization") token: String,
         @Query("searchKeyword") searchKeyword: String?,
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Call<PageResponse<BoardDto>>
+    ): Response<Map<String, Any>> // Authorization 추가됨
 
     @GET("/api/boards/{id}")
-    fun getBoardById(
+    suspend fun getBoardById(
         @Header("Authorization") token: String,
         @Path("id") id: Long
-    ): Call<BoardDto>
+    ): Response<BoardDto> // Authorization 추가됨
 
     @POST("/api/boards")
-    fun createBoard(
+    suspend fun createBoard(
         @Header("Authorization") token: String,
         @Body boardDto: BoardDto
-    ): Call<ResponseBody>
+    ): Response<ResponseBody> // Authorization 추가됨
 
-    @PUT("/api/boards/update")
-    fun updateBoard(
+    @PUT("/api/boards/{id}")
+    suspend fun updateBoard(
         @Header("Authorization") token: String,
+        @Path("id") id: Long,
         @Body boardDto: BoardDto
-    ): Call<ResponseBody>
+    ): Response<ResponseBody> // Authorization 추가됨
 
     @DELETE("/api/boards/{id}")
-    fun deleteBoard(
+    suspend fun deleteBoard(
         @Header("Authorization") token: String,
         @Path("id") id: Long
-    ): Call<ResponseBody>
+    ): Response<ResponseBody> // Authorization 추가됨
 
-    // Comment 관련 메서드
-    @POST("/api/comments/create/{boardId}")
-    fun createComment(
+    // Comment 관련 API
+    @POST("/api/comments/{boardId}")
+    suspend fun createComment(
         @Header("Authorization") token: String,
         @Path("boardId") boardId: Long,
         @Body commentDto: CommentDto
-    ): Call<ResponseBody>
+    ): Response<ResponseBody> // Authorization 추가됨
 
-    @PUT("/api/comments/update/{commentId}")
-    fun updateComment(
+    @GET("/api/comments/{commentId}")
+    suspend fun getCommentById(
+        @Header("Authorization") token: String,
+        @Path("commentId") commentId: Long
+    ): Response<CommentDto> // Authorization 추가됨
+
+    @PUT("/api/comments/{commentId}")
+    suspend fun updateComment(
         @Header("Authorization") token: String,
         @Path("commentId") commentId: Long,
         @Body commentDto: CommentDto
-    ): Call<ResponseBody>
+    ): Response<ResponseBody> // Authorization 추가됨
 
-    @DELETE("/api/comments/delete/{commentId}")
-    fun deleteComment(
+    @DELETE("/api/comments/{commentId}")
+    suspend fun deleteComment(
         @Header("Authorization") token: String,
         @Path("commentId") commentId: Long
-    ): Call<ResponseBody>
+    ): Response<ResponseBody> // Authorization 추가됨
 }
