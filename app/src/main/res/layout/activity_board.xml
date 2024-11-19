@@ -7,57 +7,120 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- 게시판 목록 -->
+        <TextView
+            android:id="@+id/boardListTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="게시판 목록"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
 
         <TextView
             android:id="@+id/boardListTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:padding="8dp"
             android:background="#EEEEEE"
+            android:scrollbars="vertical"
+            android:gravity="top"
             android:textSize="14sp"
-            android:scrollbars="vertical" />
+            android:hint="게시글 목록이 표시됩니다." />
+
+        <!-- 게시글 작성 -->
+        <TextView
+            android:id="@+id/boardTitleLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="게시글 제목"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
 
         <EditText
             android:id="@+id/boardTitleEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Board Title" />
+            android:hint="제목을 입력하세요"
+            android:background="@android:color/white"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/boardContentLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="게시글 내용"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
 
         <EditText
             android:id="@+id/boardContentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Board Content" />
+            android:hint="내용을 입력하세요"
+            android:background="@android:color/white"
+            android:padding="8dp" />
 
-        <Button
-            android:id="@+id/addBoardButton"
+        <!-- 버튼들 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Board" />
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
 
-        <Button
-            android:id="@+id/updateBoardButton"
+            <Button
+                android:id="@+id/addBoardButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="작성" />
+
+            <Button
+                android:id="@+id/updateBoardButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="수정"
+                android:layout_marginStart="8dp" />
+
+            <Button
+                android:id="@+id/deleteBoardButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="삭제"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- 댓글 작성 -->
+        <TextView
+            android:id="@+id/commentSectionLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update Board" />
-
-        <Button
-            android:id="@+id/deleteBoardButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete Board" />
+            android:text="댓글 작성"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
 
         <EditText
             android:id="@+id/commentContentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Comment Content" />
+            android:hint="댓글을 입력하세요"
+            android:background="@android:color/white"
+            android:padding="8dp" />
 
         <Button
             android:id="@+id/addCommentButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Comment" />
+            android:text="댓글 작성"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 </ScrollView>
