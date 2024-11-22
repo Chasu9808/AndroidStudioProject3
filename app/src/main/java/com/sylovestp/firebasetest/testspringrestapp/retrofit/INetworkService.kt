@@ -75,32 +75,26 @@ interface INetworkService {
         @Query("searchKeyword") searchKeyword: String?,
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Response<Map<String, Any>>
-
-    @GET("/api/boards/{id}")
-    suspend fun getBoardById(
-        @Header("Authorization") token: String,
-        @Path("id") id: Long
-    ): Response<BoardDto>
+    ): Response<BoardPageResponse>
 
     @POST("/api/boards")
     suspend fun createBoard(
         @Header("Authorization") token: String,
-        @Body boardDto: BoardDto
-    ): Response<ResponseBody>
+        @Body board: BoardDto
+    ): Response<Void>
 
     @PUT("/api/boards/{id}")
     suspend fun updateBoard(
         @Header("Authorization") token: String,
-        @Path("id") id: Long,
-        @Body boardDto: BoardDto
-    ): Response<ResponseBody>
+        @Path("id") boardId: Long,
+        @Body board: BoardDto
+    ): Response<Void>
 
     @DELETE("/api/boards/{id}")
     suspend fun deleteBoard(
         @Header("Authorization") token: String,
-        @Path("id") id: Long
-    ): Response<ResponseBody>
+        @Path("id") boardId: Long
+    ): Response<Void>
 
     // Comment 관련 API
     @GET("/api/comments/board/{boardId}")

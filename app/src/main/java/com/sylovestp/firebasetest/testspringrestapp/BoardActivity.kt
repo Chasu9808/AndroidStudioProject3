@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sylovestp.firebasetest.testspringrestapp.dto.BoardDto
+import com.sylovestp.firebasetest.testspringrestapp.dto.BoardPageResponse
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,8 +53,8 @@ class BoardActivity : AppCompatActivity() {
         deleteBoardButton = findViewById(R.id.deleteBoardButton)
 
         addBoardButton.setOnClickListener { createBoard() }
-        updateBoardButton.setOnClickListener { updateBoard(1L) } // 예시 ID
-        deleteBoardButton.setOnClickListener { deleteBoard(1L) } // 예시 ID
+        updateBoardButton.setOnClickListener { updateBoardPrompt() }
+        deleteBoardButton.setOnClickListener { deleteBoardPrompt() }
     }
 
     private fun getJwtTokenFromSharedPreferences(): String {
@@ -72,12 +73,18 @@ class BoardActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun handleFetchBoardsResponse(response: Response<Map<String, Any>>) {
+    private suspend fun handleFetchBoardsResponse(response: Response<BoardPageResponse>) {
         withContext(Dispatchers.Main) {
             if (response.isSuccessful) {
-                val boards = response.body()?.get("boards") as? List<Map<String, Any>>
-                boardListTextView.text =
-                    boards?.joinToString("\n") { it.toString() } ?: "게시글이 없습니다."
+                val boardPage = response.body()
+                if (boardPage != null && boardPage.boards.isNotEmpty()) {
+                    val boardTexts = boardPage.boards.map { board ->
+                        "제목: ${board.title}, 내용: ${board.boardContent}, 작성자: ${board.writer}"
+                    }
+                    boardListTextView.text = boardTexts.joinToString("\n")
+                } else {
+                    boardListTextView.text = "게시글이 없습니다."
+                }
             } else {
                 logError("게시판 데이터를 불러오지 못했습니다.", response.errorBody()?.string())
             }
@@ -105,6 +112,15 @@ class BoardActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateBoardPrompt() {
+        val boardId = getBoardIdFromInput()
+        if (boardId != null) {
+            updateBoard(boardId)
+        } else {
+            showToast("유효한 게시글 ID를 입력해주세요.")
+        }
+    }
+
     private fun updateBoard(boardId: Long) {
         val title = boardTitleEditText.text.toString()
         val content = boardContentEditText.text.toString()
@@ -123,6 +139,15 @@ class BoardActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 logError("게시글 수정 중 오류 발생", e.message)
             }
+        }
+    }
+
+    private fun deleteBoardPrompt() {
+        val boardId = getBoardIdFromInput()
+        if (boardId != null) {
+            deleteBoard(boardId)
+        } else {
+            showToast("유효한 게시글 ID를 입력해주세요.")
         }
     }
 
@@ -157,6 +182,11 @@ class BoardActivity : AppCompatActivity() {
                 logError("게시글 삭제 실패", response.errorBody()?.string())
             }
         }
+    }
+
+    private fun getBoardIdFromInput(): Long? {
+        val input = boardTitleEditText.text.toString()
+        return input.toLongOrNull()
     }
 
     private fun navigateToLogin() {
