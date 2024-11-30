@@ -5,8 +5,15 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tvComment"
-        android:layout_width="wrap_content"
+        android:id="@+id/commentWriter"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comment" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/commentContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
 </LinearLayout>

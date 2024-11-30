@@ -68,14 +68,14 @@ interface INetworkService {
         @Body passwordDetails: Map<String, String>
     ): Call<ResponseBody>
 
-    // Board 관련 API
+    // 게시글 CRUD
     @GET("/api/boards")
     suspend fun getAllBoards(
         @Header("Authorization") token: String,
         @Query("searchKeyword") searchKeyword: String?,
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Response<Map<String, Any>>
+    ): Response<PageResponse<BoardDto>>
 
     @GET("/api/boards/{id}")
     suspend fun getBoardById(
@@ -102,7 +102,7 @@ interface INetworkService {
         @Path("id") id: Long
     ): Response<ResponseBody>
 
-    // Comment 관련 API
+    // 댓글 CRUD
     @GET("/api/comments/board/{boardId}")
     suspend fun getCommentsForBoard(
         @Header("Authorization") token: String,
@@ -115,12 +115,6 @@ interface INetworkService {
         @Path("boardId") boardId: Long,
         @Body commentDto: CommentDto
     ): Response<ResponseBody>
-
-    @GET("/api/comments/{commentId}")
-    suspend fun getCommentById(
-        @Header("Authorization") token: String,
-        @Path("commentId") commentId: Long
-    ): Response<CommentDto>
 
     @PUT("/api/comments/{commentId}")
     suspend fun updateComment(

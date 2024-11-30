@@ -1,81 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- 댓글 리스트 -->
-    <TextView
-        android:id="@+id/commentListTitle"
+    <!-- 댓글 목록 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="댓글 목록"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingBottom="8dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp">
-
-        <TextView
-            android:id="@+id/commentListTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:padding="8dp"
-            android:scrollbars="vertical" />
-    </ScrollView>
-
-    <!-- 댓글 작성 -->
-    <TextView
-        android:id="@+id/commentContentTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="댓글 내용"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="4dp" />
-
-    <EditText
-        android:id="@+id/commentContentEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="댓글을 입력하세요"
-        android:background="@android:color/white"
-        android:padding="8dp" />
-
-    <!-- 버튼들 -->
+    <!-- CRUD 버튼들 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:gravity="center">
 
         <Button
             android:id="@+id/addCommentButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="작성" />
+            android:text="Add Comment" />
 
         <Button
             android:id="@+id/updateCommentButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="수정"
-            android:layout_marginStart="8dp" />
+            android:text="Update Comment"
+            android:layout_marginStart="16dp" />
 
         <Button
             android:id="@+id/deleteCommentButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="삭제"
-            android:layout_marginStart="8dp" />
+            android:text="Delete Comment"
+            android:layout_marginStart="16dp" />
     </LinearLayout>
 </LinearLayout>

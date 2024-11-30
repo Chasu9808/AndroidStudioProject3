@@ -2,20 +2,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/boardTitleTextView"
+    <EditText
+        android:id="@+id/boardTitleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:paddingBottom="4dp" />
+        android:hint="Title" />
 
-    <TextView
-        android:id="@+id/boardWriterTextView"
+    <EditText
+        android:id="@+id/boardContentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#555555" />
+        android:hint="Content"
+        android:inputType="textMultiLine"
+        android:minLines="3" />
 </LinearLayout>
