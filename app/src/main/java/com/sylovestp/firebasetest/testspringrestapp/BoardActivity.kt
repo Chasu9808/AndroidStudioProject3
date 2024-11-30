@@ -21,6 +21,7 @@ import retrofit2.Response
 
 class BoardActivity : AppCompatActivity() {
 
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var addBoardButton: Button
     private lateinit var updateBoardButton: Button
