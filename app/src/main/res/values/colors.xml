@@ -10,4 +10,7 @@
     <color name="dark_brown">#4E342E</color>
     <color name="beige">#D7CCC8</color>
     <color name="khaki_green">#8D6E63</color>
+    <color name="primary">#007BFF</color>
+    <color name="green">#28A745</color> <!-- 초록색 (View 버튼 색상) -->
+    <color name="red">#DC3545</color>   <!-- 빨간색 (Delete 버튼 색상) -->
 </resources>
