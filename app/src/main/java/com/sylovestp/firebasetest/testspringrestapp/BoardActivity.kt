@@ -8,19 +8,18 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sylovestp.firebasetest.testspringrestapp.adapter.BoardAdapter
 import com.sylovestp.firebasetest.testspringrestapp.dto.BoardDto
-import com.sylovestp.firebasetest.testspringrestapp.dto.PageResponse
 import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class BoardActivity : AppCompatActivity() {
-
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var addBoardButton: Button
@@ -37,10 +36,16 @@ class BoardActivity : AppCompatActivity() {
 
         jwtToken = getJwtTokenFromSharedPreferences()
         if (jwtToken.isEmpty()) {
-            Toast.makeText(this, "JWT 토큰이 없습니다. 다시 로그인해주세요.", Toast.LENGTH_SHORT).show()
+            showToast("JWT 토큰이 없습니다. 다시 로그인해주세요.")
+            finish()
             return
         }
 
+        initViews()
+        fetchBoards()
+    }
+
+    private fun initViews() {
         recyclerView = findViewById(R.id.boardRecyclerView)
         addBoardButton = findViewById(R.id.addBoardButton)
         updateBoardButton = findViewById(R.id.updateBoardButton)
@@ -51,20 +56,18 @@ class BoardActivity : AppCompatActivity() {
         addBoardButton.setOnClickListener { showBoardDialog(null) }
         updateBoardButton.setOnClickListener {
             if (selectedBoardId == null) {
-                Toast.makeText(this, "수정할 게시글을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                showToast("수정할 게시글을 선택해주세요.")
             } else {
                 showBoardDialog(selectedBoardId)
             }
         }
         deleteBoardButton.setOnClickListener {
             if (selectedBoardId == null) {
-                Toast.makeText(this, "삭제할 게시글을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                showToast("삭제할 게시글을 선택해주세요.")
             } else {
                 deleteBoard(selectedBoardId!!)
             }
         }
-
-        fetchBoards()
     }
 
     private fun getJwtTokenFromSharedPreferences(): String {
@@ -73,7 +76,7 @@ class BoardActivity : AppCompatActivity() {
     }
 
     private fun fetchBoards() {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = apiService.getAllBoards(
                     token = "Bearer $jwtToken",
@@ -81,31 +84,32 @@ class BoardActivity : AppCompatActivity() {
                     page = 0,
                     size = 10
                 )
-                Log.d("BoardActivity", "Response: ${response.body()}")
-                handleFetchBoardsResponse(response)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Log.d("BoardActivity", "Raw JSON: ${response.body()}")
+                        Log.d("BoardActivity", "Response Error Body: ${response.errorBody()?.string()}")
+                        Log.d("BoardActivity", "Response Code: ${response.code()}")
+                        Log.d("BoardActivity", "Response Body: ${response.body()}")
+                        val boards = response.body()?.content ?: emptyList()
+                        if (boards.isEmpty()) {
+                            showToast("게시글이 없습니다.")
+                            Log.d("BoardActivity", "Boards are empty or null")
+                        }
+                        (recyclerView.adapter as? BoardAdapter)?.updateBoards(boards) ?: run {
+                            recyclerView.adapter = BoardAdapter(boards) { boardId ->
+                                selectedBoardId = boardId
+                                showToast("선택된 게시글 ID: $boardId")
+                            }
+                        }
+                    } else {
+                        showToast("서버 응답 실패")
+                    }
+                }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@BoardActivity, "게시판 데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                    showToast("게시판 데이터를 불러오는 중 오류가 발생했습니다.")
+                    Log.e("BoardActivity", "fetchBoards Error: ${e.message}")
                 }
-            }
-        }
-    }
-
-    private suspend fun handleFetchBoardsResponse(response: Response<PageResponse<BoardDto>>) {
-        withContext(Dispatchers.Main) {
-            if (response.isSuccessful) {
-                val boards = response.body()?.content ?: emptyList()
-                Log.d("BoardActivity", "Boards: $boards")
-                if (recyclerView.adapter == null) {
-                    recyclerView.adapter = BoardAdapter(boards) { boardId ->
-                        selectedBoardId = boardId
-                        Toast.makeText(this@BoardActivity, "선택된 게시글 ID: $boardId", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    (recyclerView.adapter as BoardAdapter).updateBoards(boards)
-                }
-            } else {
-                Toast.makeText(this@BoardActivity, "서버 응답 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -141,13 +145,13 @@ class BoardActivity : AppCompatActivity() {
             boardContent = content
         )
 
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = apiService.createBoard("Bearer $jwtToken", board)
                 handleCreateOrUpdateResponse(response, "게시판이 성공적으로 추가되었습니다.")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@BoardActivity, "게시판 추가 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                    showToast("게시판 추가 중 오류가 발생했습니다.")
                 }
             }
         }
@@ -161,26 +165,26 @@ class BoardActivity : AppCompatActivity() {
             boardContent = content
         )
 
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = apiService.updateBoard("Bearer $jwtToken", boardId, board)
                 handleCreateOrUpdateResponse(response, "게시판이 성공적으로 수정되었습니다.")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@BoardActivity, "게시판 수정 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                    showToast("게시판 수정 중 오류가 발생했습니다.")
                 }
             }
         }
     }
 
     private fun deleteBoard(boardId: Long) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = apiService.deleteBoard("Bearer $jwtToken", boardId)
                 handleDeleteResponse(response)
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@BoardActivity, "게시판 삭제 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                    showToast("게시판 삭제 중 오류가 발생했습니다.")
                 }
             }
         }
@@ -189,10 +193,10 @@ class BoardActivity : AppCompatActivity() {
     private suspend fun handleCreateOrUpdateResponse(response: Response<*>, successMessage: String) {
         withContext(Dispatchers.Main) {
             if (response.isSuccessful) {
-                Toast.makeText(this@BoardActivity, successMessage, Toast.LENGTH_SHORT).show()
+                showToast(successMessage)
                 fetchBoards()
             } else {
-                Toast.makeText(this@BoardActivity, "요청 처리 실패", Toast.LENGTH_SHORT).show()
+                showToast("요청 처리 실패")
             }
         }
     }
@@ -200,11 +204,15 @@ class BoardActivity : AppCompatActivity() {
     private suspend fun handleDeleteResponse(response: Response<*>) {
         withContext(Dispatchers.Main) {
             if (response.isSuccessful) {
-                Toast.makeText(this@BoardActivity, "게시판이 성공적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                showToast("게시판이 성공적으로 삭제되었습니다.")
                 fetchBoards()
             } else {
-                Toast.makeText(this@BoardActivity, "게시판 삭제 실패", Toast.LENGTH_SHORT).show()
+                showToast("게시판 삭제 실패")
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
