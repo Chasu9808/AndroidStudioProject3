@@ -22,6 +22,7 @@ class BoardDetailActivity : AppCompatActivity() {
     private lateinit var contentTextView: TextView
     private lateinit var editButton: Button
     private lateinit var deleteButton: Button
+    private lateinit var addCommentButton: Button // 댓글 작성 버튼 추가
     private val apiService by lazy { (application as MyApplication).networkService }
     private lateinit var jwtToken: String
     private var boardId: Long? = null
@@ -42,6 +43,7 @@ class BoardDetailActivity : AppCompatActivity() {
         contentTextView = findViewById(R.id.detailBoardContentTextView)
         editButton = findViewById(R.id.editBoardButton)
         deleteButton = findViewById(R.id.deleteBoardButton)
+        addCommentButton = findViewById(R.id.addCommentButton) // 댓글 작성 버튼 초기화
 
         titleTextView.text = boardTitle
         writerTextView.text = "작성자: $boardWriter"
@@ -49,11 +51,19 @@ class BoardDetailActivity : AppCompatActivity() {
 
         editButton.setOnClickListener { showEditDialog() }
         deleteButton.setOnClickListener { deleteBoard() }
+        addCommentButton.setOnClickListener { navigateToCommentActivity() } // 댓글 작성 화면 이동
     }
 
     private fun getJwtTokenFromSharedPreferences(): String {
         val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         return sharedPreferences.getString("jwt_token", "").orEmpty()
+    }
+
+    private fun navigateToCommentActivity() {
+        val intent = Intent(this, CommentActivity::class.java).apply {
+            putExtra("BOARD_ID", boardId) // 게시글 ID 전달
+        }
+        startActivity(intent)
     }
 
     private fun showEditDialog() {
