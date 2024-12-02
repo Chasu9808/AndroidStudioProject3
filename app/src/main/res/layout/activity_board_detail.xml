@@ -4,30 +4,37 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- 게시글 제목 -->
     <TextView
         android:id="@+id/detailBoardTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:text="게시글 제목" />
 
+    <!-- 작성자 정보 -->
     <TextView
         android:id="@+id/detailBoardWriterTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="#555555"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:text="작성자: 작성자 이름" />
 
+    <!-- 게시글 내용 -->
     <TextView
         android:id="@+id/detailBoardContentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="#777777"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="16dp"
+        android:text="게시글 내용이 여기에 표시됩니다." />
 
+    <!-- 버튼 영역 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,4 +61,23 @@
             android:layout_marginStart="16dp"
             android:text="Add Comment" />
     </LinearLayout>
+
+    <!-- 댓글 목록 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="댓글 목록"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp" />
+
 </LinearLayout>

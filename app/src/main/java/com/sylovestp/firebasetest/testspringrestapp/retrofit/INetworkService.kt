@@ -1,12 +1,30 @@
 package com.sylovestp.firebasetest.testspringrestapp.retrofit
 
-import com.sylovestp.firebasetest.testspringrestapp.dto.*
+import com.sylovestp.firebasetest.testspringrestapp.dto.BoardDto
+import com.sylovestp.firebasetest.testspringrestapp.dto.CommentDto
+import com.sylovestp.firebasetest.testspringrestapp.dto.LoginRequest
+import com.sylovestp.firebasetest.testspringrestapp.dto.LoginResponse
+import com.sylovestp.firebasetest.testspringrestapp.dto.PageResponse
+import com.sylovestp.firebasetest.testspringrestapp.dto.PasswordChangeRequest
+import com.sylovestp.firebasetest.testspringrestapp.dto.PredictionResult
+import com.sylovestp.firebasetest.testspringrestapp.dto.Tool
+import com.sylovestp.firebasetest.testspringrestapp.dto.UserDTO
+import com.sylovestp.firebasetest.testspringrestapp.dto.UserItem
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface INetworkService {
 
@@ -109,21 +127,21 @@ interface INetworkService {
         @Path("boardId") boardId: Long
     ): Response<List<CommentDto>>
 
-    @POST("/api/comments/{boardId}")
+    @POST("/api/comments/create/{boardId}")
     suspend fun createComment(
         @Header("Authorization") token: String,
         @Path("boardId") boardId: Long,
         @Body commentDto: CommentDto
     ): Response<ResponseBody>
 
-    @PUT("/api/comments/{commentId}")
+    @PUT("/api/comments/update/{commentId}")
     suspend fun updateComment(
         @Header("Authorization") token: String,
         @Path("commentId") commentId: Long,
         @Body commentDto: CommentDto
     ): Response<ResponseBody>
 
-    @DELETE("/api/comments/{commentId}")
+    @DELETE("/api/comments/delete/{commentId}")
     suspend fun deleteComment(
         @Header("Authorization") token: String,
         @Path("commentId") commentId: Long
