@@ -1,5 +1,6 @@
 package com.sylovestp.firebasetest.testspringrestapp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -34,6 +35,10 @@ class BoardDetailActivity : AppCompatActivity() {
     private lateinit var jwtToken: String
     private var boardId: Long = -1L // 기본값으로 Long 타입 설정
     private val commentList = mutableListOf<CommentDto>()
+
+    companion object {
+        private const val REQUEST_CODE_COMMENT_DETAIL = 1001 // 상수 추가
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +79,7 @@ class BoardDetailActivity : AppCompatActivity() {
 
     private fun setupCommentRecyclerView() {
         commentAdapter = CommentAdapter(commentList) { commentId, writer, content ->
-            navigateToCommentDetail(commentId, writer, content) // 클릭 이벤트 처리
+            navigateToCommentDetail(commentId, writer, content)
         }
         commentRecyclerView.layoutManager = LinearLayoutManager(this)
         commentRecyclerView.adapter = commentAdapter
@@ -156,8 +161,16 @@ class BoardDetailActivity : AppCompatActivity() {
             putExtra("COMMENT_ID", commentId)
             putExtra("COMMENT_WRITER", writer)
             putExtra("COMMENT_CONTENT", content)
+            putExtra("BOARD_ID", boardId)
         }
-        startActivity(intent)
+        startActivityForResult(intent, REQUEST_CODE_COMMENT_DETAIL) // 수정
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_COMMENT_DETAIL && resultCode == Activity.RESULT_OK) {
+            loadComments() // 댓글 목록 갱신
+        }
     }
 
     private fun getJwtTokenFromSharedPreferences(): String {
