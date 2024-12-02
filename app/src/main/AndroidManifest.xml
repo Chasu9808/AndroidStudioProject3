@@ -27,6 +27,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".BoardDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateBoardActivity"
             android:exported="false" />
         <activity

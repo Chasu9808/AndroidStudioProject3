@@ -11,10 +11,15 @@
         android:hint="Title" />
 
     <EditText
+        android:id="@+id/boardWriterEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Writer" />
+
+    <EditText
         android:id="@+id/boardContentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Content"
-        android:inputType="textMultiLine"
         android:minLines="3" />
 </LinearLayout>

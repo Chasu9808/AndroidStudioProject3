@@ -4,39 +4,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- 게시글 목록 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/boardRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp" />
+        android:layout_weight="1" />
 
-    <!-- CRUD 버튼들 -->
-    <LinearLayout
+    <Button
+        android:id="@+id/addBoardButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/addBoardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Board" />
-
-        <Button
-            android:id="@+id/updateBoardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update Board"
-            android:layout_marginStart="16dp" />
-
-        <Button
-            android:id="@+id/deleteBoardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete Board"
-            android:layout_marginStart="16dp" />
-    </LinearLayout>
+        android:text="Add Board" />
 </LinearLayout>

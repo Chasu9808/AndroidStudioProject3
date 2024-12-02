@@ -13,11 +13,6 @@ class BoardAdapter(
     private val onItemClick: (Long) -> Unit
 ) : RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
 
-    fun updateBoards(newBoards: List<BoardDto>) {
-        boards = newBoards
-        notifyDataSetChanged() // 데이터 변경 시 갱신
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_board, parent, false)
         return BoardViewHolder(view)
@@ -33,9 +28,13 @@ class BoardAdapter(
 
     class BoardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.boardTitleTextView)
+        private val writerTextView: TextView = itemView.findViewById(R.id.boardWriterTextView)
+        private val contentTextView: TextView = itemView.findViewById(R.id.boardContentTextView)
 
         fun bind(board: BoardDto) {
             titleTextView.text = board.title
+            writerTextView.text = "작성자: ${board.writer}"
+            contentTextView.text = board.boardContent
         }
     }
 }
