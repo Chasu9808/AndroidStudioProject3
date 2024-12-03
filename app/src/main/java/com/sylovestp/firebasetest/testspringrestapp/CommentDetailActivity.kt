@@ -1,5 +1,6 @@
 package com.sylovestp.firebasetest.testspringrestapp
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.widget.Button
@@ -74,6 +75,7 @@ class CommentDetailActivity : AppCompatActivity() {
                             "댓글이 수정되었습니다.",
                             Toast.LENGTH_SHORT
                         ).show()
+                        setResult(Activity.RESULT_OK) // 결과 설정
                         finish()
                     } else {
                         Toast.makeText(
@@ -106,6 +108,7 @@ class CommentDetailActivity : AppCompatActivity() {
                             "댓글이 삭제되었습니다.",
                             Toast.LENGTH_SHORT
                         ).show()
+                        setResult(Activity.RESULT_OK) // 결과 설정
                         finish()
                     } else {
                         Toast.makeText(
