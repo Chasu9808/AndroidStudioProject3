@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <!-- 게시글 제목 -->
+
     <TextView
         android:id="@+id/boardTitleTextView"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:textStyle="bold"
         android:paddingBottom="4dp" />
 
-    <!-- 게시글 작성자 -->
+
     <TextView
         android:id="@+id/boardWriterTextView"
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
         android:textColor="#555555"
         android:paddingBottom="4dp" />
 
-    <!-- 게시글 내용 -->
+
     <TextView
         android:id="@+id/boardContentTextView"
         android:layout_width="match_parent"

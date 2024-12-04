@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                             true
                         }
-                        R.id.action_board -> { // 추가된 게시판 이동 버튼
+                        R.id.action_board -> {
                             val intent = Intent(this, BoardActivity::class.java)
                             startActivity(intent)
                             true

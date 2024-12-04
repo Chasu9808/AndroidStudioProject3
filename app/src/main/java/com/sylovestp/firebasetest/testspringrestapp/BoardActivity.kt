@@ -146,7 +146,7 @@ class BoardActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_DETAIL && resultCode == RESULT_OK) {
-            fetchBoards() // 상세 페이지에서 돌아오면 게시글 목록 새로고침
+            fetchBoards()
         }
     }
 

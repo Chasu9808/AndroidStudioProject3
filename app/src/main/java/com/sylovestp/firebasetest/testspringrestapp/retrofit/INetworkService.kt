@@ -28,14 +28,14 @@ import retrofit2.http.Query
 
 interface INetworkService {
 
-    // 이미지 분류
+
     @Multipart
     @POST("/classify")
     fun predictImage(
         @Part image: MultipartBody.Part? = null
     ): Call<PredictionResult>
 
-    // 사용자 등록
+
     @Multipart
     @POST("/public/users")
     fun registerUser(
@@ -43,11 +43,11 @@ interface INetworkService {
         @Part profileImage: MultipartBody.Part? = null
     ): Call<ResponseBody>
 
-    // 로그인
+
     @POST("/generateToken")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    // 사용자 페이지 조회 (Paging)
+
     @GET("/api/users/page")
     fun getItems(
         @Query("page") page: Int,
@@ -60,11 +60,11 @@ interface INetworkService {
         @Query("size") size: Int
     ): Response<PageResponse<UserItem>>
 
-    // 도구 리스트 조회
+
     @GET("api/tools/list")
     fun findAll(@Header("Authorization") token: String): Call<List<Tool>>
 
-    // MyPage 관련 API
+
     @GET("/api/users/mypage")
     fun getMyPage(@Header("Authorization") token: String): Call<UserDTO>
 
@@ -86,7 +86,7 @@ interface INetworkService {
         @Body passwordDetails: Map<String, String>
     ): Call<ResponseBody>
 
-    // 게시글 CRUD
+
     @GET("/api/boards")
     suspend fun getAllBoards(
         @Header("Authorization") token: String,
@@ -120,7 +120,7 @@ interface INetworkService {
         @Path("id") id: Long
     ): Response<ResponseBody>
 
-    // 댓글 CRUD
+
     @GET("/api/comments/board/{boardId}")
     suspend fun getCommentsForBoard(
         @Header("Authorization") token: String,

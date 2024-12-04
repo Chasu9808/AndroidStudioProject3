@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
 
-    <!-- Registration Date -->
+
     <TextView
         android:id="@+id/regDateTextView"
         android:layout_width="0dp"
@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgTextView" />
 
-    <!-- Modification Date -->
+
     <TextView
         android:id="@+id/modDateTextView"
         android:layout_width="0dp"

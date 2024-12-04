@@ -24,7 +24,7 @@ class CommentDetailActivity : AppCompatActivity() {
     private val apiService by lazy { (application as MyApplication).networkService }
     private lateinit var jwtToken: String
     private var commentId: Long = 0
-    private var boardId: Long = 0 // boardId 변수 추가
+    private var boardId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class CommentDetailActivity : AppCompatActivity() {
         jwtToken = getJwtTokenFromSharedPreferences()
 
         commentId = intent.getLongExtra("COMMENT_ID", -1L)
-        boardId = intent.getLongExtra("BOARD_ID", -1L) // boardId 받기
+        boardId = intent.getLongExtra("BOARD_ID", -1L)
         val writer = intent.getStringExtra("COMMENT_WRITER") ?: "Unknown"
         val content = intent.getStringExtra("COMMENT_CONTENT") ?: ""
 
@@ -64,7 +64,7 @@ class CommentDetailActivity : AppCompatActivity() {
                     commentId = commentId,
                     commentDto = CommentDto(
                         id = commentId,
-                        boardId = boardId, // boardId 추가
+                        boardId = boardId,
                         content2 = updatedContent
                     )
                 )
@@ -75,7 +75,7 @@ class CommentDetailActivity : AppCompatActivity() {
                             "댓글이 수정되었습니다.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        setResult(Activity.RESULT_OK) // 결과 설정
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
                         Toast.makeText(
@@ -108,7 +108,7 @@ class CommentDetailActivity : AppCompatActivity() {
                             "댓글이 삭제되었습니다.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        setResult(Activity.RESULT_OK) // 결과 설정
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
                         Toast.makeText(

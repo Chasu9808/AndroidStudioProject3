@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Static Information -->
+
         <TextView
             android:id="@+id/usernameTextView"
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             android:onClick="onUpdateClick"
             android:layout_marginTop="16dp" />
 
-        <!-- Password Management -->
+
         <EditText
             android:id="@+id/currentPasswordEditText"
             android:layout_width="match_parent"

@@ -33,11 +33,11 @@ class BoardDetailActivity : AppCompatActivity() {
 
     private val apiService by lazy { (application as MyApplication).networkService }
     private lateinit var jwtToken: String
-    private var boardId: Long = -1L // 기본값으로 Long 타입 설정
+    private var boardId: Long = -1L
     private val commentList = mutableListOf<CommentDto>()
 
     companion object {
-        private const val REQUEST_CODE_COMMENT_DETAIL = 1001 // 상수 추가
+        private const val REQUEST_CODE_COMMENT_DETAIL = 1001
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -163,13 +163,13 @@ class BoardDetailActivity : AppCompatActivity() {
             putExtra("COMMENT_CONTENT", content)
             putExtra("BOARD_ID", boardId)
         }
-        startActivityForResult(intent, REQUEST_CODE_COMMENT_DETAIL) // 수정
+        startActivityForResult(intent, REQUEST_CODE_COMMENT_DETAIL)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_COMMENT_DETAIL && resultCode == Activity.RESULT_OK) {
-            loadComments() // 댓글 목록 갱신
+            loadComments()
         }
     }
 

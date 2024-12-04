@@ -150,7 +150,7 @@ class MyPageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     showToast("Password changed successfully")
-                    clearSessionAndNavigateToMain() // 세션 초기화 및 메인 화면 이동
+                    clearSessionAndNavigateToMain()
                 } else {
                     logError("Failed to change password", response.errorBody()?.string())
                 }
@@ -172,7 +172,7 @@ class MyPageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     showToast("Account deleted successfully")
-                    clearSessionAndNavigateToMain() // 세션 초기화 및 메인 화면 이동
+                    clearSessionAndNavigateToMain()
                 } else {
                     val errorMessage = response.errorBody()?.string() ?: "Unknown error"
                     logError("Failed to delete account", errorMessage)
@@ -186,11 +186,11 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     private fun clearSessionAndNavigateToMain() {
-        // SharedPreferences에서 모든 사용자 정보 제거
-        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply() // 모든 정보 제거
 
-        // Retrofit 인터셉터에 세션 초기화 신호 전달
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+
+
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

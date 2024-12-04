@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".UserRecyclerViewVer2Activity">
 
-    <!--리사이클러뷰 먼저 붙이기-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/retrofitRecyclerView2"
         android:layout_width="match_parent"

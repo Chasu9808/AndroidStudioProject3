@@ -6,11 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <!-- Short Description -->
 
-    <!-- Image Text -->
-
-    <!-- Registration Date -->
 
     <ImageView
         android:id="@+id/toolImageView"
@@ -47,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
-    <!-- Modification Date -->
+
 
     <TextView
         android:id="@+id/imgTextView"
