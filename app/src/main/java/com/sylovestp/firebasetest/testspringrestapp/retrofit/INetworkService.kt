@@ -32,9 +32,9 @@ interface INetworkService {
     @Multipart
     @POST("/classify")
     fun predictImage(
+        @Header("Authorization") token: String,
         @Part image: MultipartBody.Part? = null
     ): Call<PredictionResult>
-
 
     @Multipart
     @POST("/public/users")
@@ -47,7 +47,6 @@ interface INetworkService {
     @POST("/generateToken")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-
     @GET("/api/users/page")
     fun getItems(
         @Query("page") page: Int,
@@ -59,7 +58,6 @@ interface INetworkService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<PageResponse<UserItem>>
-
 
     @GET("api/tools/list")
     fun findAll(@Header("Authorization") token: String): Call<List<Tool>>
@@ -94,12 +92,6 @@ interface INetworkService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<PageResponse<BoardDto>>
-
-    @GET("/api/boards/{id}")
-    suspend fun getBoardById(
-        @Header("Authorization") token: String,
-        @Path("id") id: Long
-    ): Response<BoardDto>
 
     @POST("/api/boards")
     suspend fun createBoard(
