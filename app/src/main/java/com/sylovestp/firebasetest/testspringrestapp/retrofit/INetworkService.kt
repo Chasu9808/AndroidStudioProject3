@@ -72,7 +72,7 @@ interface INetworkService {
         @Body updates: Map<String, String>
     ): Call<ResponseBody>
 
-    @POST("/api/users/mypage/changePassword")
+    @PUT("/api/users/mypage/changePassword")
     fun changePassword(
         @Header("Authorization") token: String,
         @Body passwordDetails: PasswordChangeRequest
