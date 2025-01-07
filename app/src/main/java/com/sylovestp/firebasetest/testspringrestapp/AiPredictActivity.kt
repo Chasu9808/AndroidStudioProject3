@@ -2,6 +2,7 @@ package com.sylovestp.firebasetest.testspringrestapp
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -17,8 +18,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
 import com.sylovestp.firebasetest.testspringrestapp.dto.PredictionResult
+import com.sylovestp.firebasetest.testspringrestapp.retrofit.MyApplication
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -31,18 +32,22 @@ import java.io.FileOutputStream
 class AiPredictActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var resultTextView: TextView
+    private lateinit var jwtToken: String
     private val CAMERA_REQUEST_CODE = 100
     private val GALLERY_REQUEST_CODE = 200
     private val CAMERA_PERMISSION_CODE = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainActivitySpring", "onCreate 실행됨")
+        Log.d("AiPredictActivity", "onCreate 실행됨")
         setContentView(R.layout.activity_ai_predict)
 
-
-        val myApplication = applicationContext as MyApplication
-        myApplication.initialize(this)
+        jwtToken = getJwtTokenFromSharedPreferences()
+        if (jwtToken.isEmpty()) {
+            showToast("JWT 토큰이 없습니다. 다시 로그인해주세요.")
+            finish()
+            return
+        }
 
         imageView = findViewById(R.id.imageView)
         resultTextView = findViewById(R.id.resultTextView)
@@ -60,11 +65,15 @@ class AiPredictActivity : AppCompatActivity() {
         }
     }
 
+    private fun getJwtTokenFromSharedPreferences(): String {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("jwt_token", "").orEmpty()
+    }
+
     private fun checkCameraPermissionAndOpenCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED
         ) {
-
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
                 Toast.makeText(this, "카메라 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
@@ -75,7 +84,6 @@ class AiPredictActivity : AppCompatActivity() {
                 CAMERA_PERMISSION_CODE
             )
         } else {
-
             openCamera()
         }
     }
@@ -97,10 +105,8 @@ class AiPredictActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-
                 openCamera()
             } else {
-
                 Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -146,7 +152,7 @@ class AiPredictActivity : AppCompatActivity() {
 
             val apiService = (application as MyApplication).getApiService()
 
-            apiService.predictImage(body).enqueue(object : Callback<PredictionResult> {
+            apiService.predictImage("Bearer $jwtToken", body).enqueue(object : Callback<PredictionResult> {
                 override fun onResponse(
                     call: Call<PredictionResult>,
                     response: Response<PredictionResult>
@@ -154,10 +160,9 @@ class AiPredictActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val result = response.body()
                         if (result != null) {
-                            Log.d("MainActivitySpring", "서버 응답 성공: $result")
+                            Log.d("AiPredictActivity", "서버 응답 성공: $result")
 
                             val displayText = "Predicted Class: ${result.predictedLabel}\nDescription: ${result.description}"
-
                             resultTextView.text = displayText
 
                             val videoView: WebView = findViewById(R.id.videoWebView)
@@ -166,20 +171,20 @@ class AiPredictActivity : AppCompatActivity() {
                             videoView.loadData(videoUrl, "text/html", "utf-8")
 
                         } else {
-                            Log.d("MainActivitySpring", "서버 응답이 null입니다.")
+                            Log.d("AiPredictActivity", "서버 응답이 null입니다.")
                         }
                     } else {
                         val errorBody = response.errorBody()?.string()
-                        Log.d("MainActivitySpring", "응답 에러: ${response.code()}, $errorBody")
+                        Log.d("AiPredictActivity", "응답 에러: ${response.code()}, $errorBody")
                     }
                 }
 
                 override fun onFailure(call: Call<PredictionResult>, t: Throwable) {
-                    Log.d("MainActivitySpring", "서버 연결 실패: ${t.message}")
+                    Log.d("AiPredictActivity", "서버 연결 실패: ${t.message}")
                 }
             })
         } ?: run {
-            Log.d("MainActivitySpring", "이미지 파일 변환 실패")
+            Log.d("AiPredictActivity", "이미지 파일 변환 실패")
         }
     }
 
@@ -193,12 +198,16 @@ class AiPredictActivity : AppCompatActivity() {
             outputStream.flush()
             outputStream.close()
 
-            Log.d("MainActivitySpring", "이미지 파일 변환 성공: ${file.absolutePath}")
+            Log.d("AiPredictActivity", "이미지 파일 변환 성공: ${file.absolutePath}")
             file
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.d("MainActivitySpring", "이미지 파일 변환 중 오류 발생: ${e.message}")
+            Log.d("AiPredictActivity", "이미지 파일 변환 중 오류 발생: ${e.message}")
             null
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

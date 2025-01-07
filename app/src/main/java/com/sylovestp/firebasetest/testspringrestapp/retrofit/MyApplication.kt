@@ -6,6 +6,7 @@ import com.sylovestp.firebasetest.testspringrestapp.interceptor.AuthInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class MyApplication : Application() {
 
@@ -28,6 +29,9 @@ class MyApplication : Application() {
 
         okHttpClient = OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor(sharedPreferences))
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
 
         retrofit_token = Retrofit.Builder()
