@@ -30,12 +30,15 @@ import java.io.File
 import java.io.FileOutputStream
 
 class AiPredictActivity : AppCompatActivity() {
+
     private lateinit var imageView: ImageView
     private lateinit var resultTextView: TextView
     private lateinit var jwtToken: String
+
     private val CAMERA_REQUEST_CODE = 100
     private val GALLERY_REQUEST_CODE = 200
     private val CAMERA_PERMISSION_CODE = 101
+    private val MEDIA_PERMISSION_CODE = 102
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +62,7 @@ class AiPredictActivity : AppCompatActivity() {
         }
 
         buttonGallery.setOnClickListener {
-            val galleryIntent =
-                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+            checkGalleryPermissionAndOpenGallery()
         }
     }
 
@@ -75,9 +76,8 @@ class AiPredictActivity : AppCompatActivity() {
             != PackageManager.PERMISSION_GRANTED
         ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                Toast.makeText(this, "카메라 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                showToast("카메라 접근 권한이 필요합니다.")
             }
-
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.CAMERA),
@@ -88,13 +88,35 @@ class AiPredictActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkGalleryPermissionAndOpenGallery() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_MEDIA_IMAGES)) {
+                showToast("갤러리 접근 권한이 필요합니다.")
+            }
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                MEDIA_PERMISSION_CODE
+            )
+        } else {
+            openGallery()
+        }
+    }
+
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (cameraIntent.resolveActivity(packageManager) != null) {
             startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
         } else {
-            Toast.makeText(this, "카메라를 실행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            showToast("카메라를 실행할 수 없습니다.")
         }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
     }
 
     override fun onRequestPermissionsResult(
@@ -103,11 +125,20 @@ class AiPredictActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                openCamera()
-            } else {
-                Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+        when (requestCode) {
+            CAMERA_PERMISSION_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    openCamera()
+                } else {
+                    showToast("카메라 권한이 필요합니다.")
+                }
+            }
+            MEDIA_PERMISSION_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    openGallery()
+                } else {
+                    showToast("갤러리 권한이 필요합니다.")
+                }
             }
         }
     }
@@ -124,19 +155,17 @@ class AiPredictActivity : AppCompatActivity() {
                         imageView.setImageBitmap(photo)
                         uploadImage(photo)
                     } else {
-                        Toast.makeText(this, "사진을 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                        showToast("사진을 가져올 수 없습니다.")
                     }
                 }
-
                 GALLERY_REQUEST_CODE -> {
                     val selectedImage: Uri? = data.data
                     if (selectedImage != null) {
                         imageView.setImageURI(selectedImage)
-                        val bitmap =
-                            MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
+                        val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
                         uploadImage(bitmap)
                     } else {
-                        Toast.makeText(this, "이미지를 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                        showToast("이미지를 선택할 수 없습니다.")
                     }
                 }
             }

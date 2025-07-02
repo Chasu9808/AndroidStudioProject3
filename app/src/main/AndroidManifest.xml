@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sylovestp.firebasetest.testspringrestapp">
 
+    <!-- ✅ 필수 인터넷 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- ✅ Android 13 이상: 이미지/비디오 각각 권한 -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-<!--    <uses-permission android:name="android.permission.CAMERA" />-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- ❌ deprecated: Android 13 이상에서 무시됨 -->
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+
+    <!-- 📷 필요한 경우만 CAMERA 권한 주석 해제 -->
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+
+    <!-- ✅ AD_ID 제거 명시 -->
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
@@ -17,6 +25,7 @@
         android:name="google_analytics_adid_collection_enabled"
         android:value="false" />
 
+    <!-- ✅ 카메라 필수 아님 명시 -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -26,68 +35,42 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_tool"
         android:label="@string/subject_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestSpringRestApp"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
-        <activity
-            android:name=".CommentDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".BoardDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".BoardActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ToolDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ToollistActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MyPageActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddressFinder"
-            android:exported="true">
+        tools:targetApi="35">
+
+        <!-- 모든 액티비티 정의 그대로 유지 -->
+        <activity android:name=".CommentDetailActivity" android:exported="true" />
+        <activity android:name=".BoardDetailActivity" android:exported="true" />
+        <activity android:name=".BoardActivity" android:exported="true" />
+        <activity android:name=".ToolDetailActivity" android:exported="true" />
+        <activity android:name=".ToollistActivity" android:exported="true" />
+        <activity android:name=".MyPageActivity" android:exported="true" />
+        <activity android:name=".AddressFinder" android:exported="true">
             <intent-filter>
                 <action android:name="com.example.addressfinder.FINDER" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AiPredictActivity"
-            android:exported="true" />
-        <activity
-            android:name=".UserRecyclerViewVer2Activity"
-            android:exported="true" />
-        <activity
-            android:name=".UserRecyclerViewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".JoinActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
+        <activity android:name=".AiPredictActivity" android:exported="true" />
+        <activity android:name=".UserRecyclerViewVer2Activity" android:exported="true" />
+        <activity android:name=".UserRecyclerViewActivity" android:exported="true" />
+        <activity android:name=".JoinActivity" android:exported="true" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+        <activity android:name=".MainActivity" android:exported="true" />
+
+        <!-- ✅ 광고 테스트용 ID (개발단계일 경우) -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
-
 </manifest>
