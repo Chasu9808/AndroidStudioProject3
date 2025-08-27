@@ -1,77 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/khaki_green"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="16dp">
 
-<!--        <EditText-->
-<!--            android:id="@+id/event_name"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Event Name" />-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/event_description"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Event Description" />-->
+        <ImageButton
+            android:id="@+id/btnOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_menu"
+            android:contentDescription="@string/options_menu"
+            app:tint="@color/black"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/event_date"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Event Date" />-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/event_time"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Event Time" />-->
+        <ImageView
+            android:id="@+id/toolImageView"
+            android:layout_width="0dp"
+            android:layout_height="308dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/toollogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnOptions" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/event_location"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Event Location" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/create_event"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Create Event" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/upload_file_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Upload Image" />-->
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="게시판"
-            android:textSize="25sp" />
+            android:text="환영합니다!"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/toolImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+        <EditText
+            android:id="@+id/etId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="ID"
+            android:inputType="text"
+            android:background="@drawable/edittext_background"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@id/toolImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="PASS"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/etId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
 
 
         <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="글작성" />
+            android:id="@+id/btnLogin"
+            android:layout_width="103dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/black"
+            android:text="로그인"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/btnSignUp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
-        <LinearLayout
-            android:id="@+id/event_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp" />
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="103dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/black"
+            android:text="로그아웃"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
 
-    </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="103dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="-15dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/black"
+            android:text="회원가입"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnLogin"
+            app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,21 +1,19 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services") // Apply Google Services plugin
-    kotlin("kapt") // Apply KAPT plugin for Kotlin
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
 }
 
 android {
-    namespace = "com.example.firebaseexample"
-    compileSdk = 34
+    namespace = "com.sylovestp.firebasetest.testspringrestapp"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.firebaseexample"
+        applicationId = "com.sylovestp.firebasetest.testspringrestapp"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
+        targetSdk = 35
+        versionCode = 16
+        versionName = "1.0.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,35 +26,50 @@ android {
             )
         }
     }
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+    viewBinding {
+        enable = true
     }
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-storage:21.0.0")
-    implementation("com.google.firebase:firebase-database:21.0.0")
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2")) // Firebase BoM for version management
-    implementation("com.google.firebase:firebase-auth:23.0.0") // Firebase Authentication
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+
+    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+    implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation(libs.androidx.paging.common.android)
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.mediation.test.suite)
+    implementation(libs.androidx.media3.common)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation("androidx.activity:activity-ktx:1.7.2")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("com.google.firebase:firebase-analytics")
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.12.0")
+    implementation("androidx.webkit:webkit:1.8.0")
 
-    // Glide dependencies
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    kotlin("kapt") // Apply KAPT plugin for Kotlin
-    kapt("com.github.bumptech.glide:compiler:4.15.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
