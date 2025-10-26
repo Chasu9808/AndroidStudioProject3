@@ -15,7 +15,7 @@
     <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
 
     <!-- 📷 필요한 경우만 CAMERA 권한 주석 해제 -->
-    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+     <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- ✅ AD_ID 제거 명시 -->
     <uses-permission
