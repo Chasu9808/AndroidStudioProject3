@@ -25,7 +25,6 @@
         android:name="google_analytics_adid_collection_enabled"
         android:value="false" />
 
-    <!-- ✅ 카메라 필수 아님 명시 -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -43,7 +42,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="35">
 
-        <!-- 모든 액티비티 정의 그대로 유지 -->
+
         <activity android:name=".CommentDetailActivity" android:exported="true" />
         <activity android:name=".BoardDetailActivity" android:exported="true" />
         <activity android:name=".BoardActivity" android:exported="true" />
@@ -68,7 +67,7 @@
         </activity>
         <activity android:name=".MainActivity" android:exported="true" />
 
-        <!-- ✅ 광고 테스트용 ID (개발단계일 경우) -->
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
