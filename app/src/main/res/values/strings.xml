@@ -1,5 +1,7 @@
 <resources>
-    <!-- Other string resources -->
-
-    <string name="event_image">Event Image</string>
+    <string name="app_name">TestSpringRestApp</string>
+    <string name="subject_name">ToolWithMe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="options_menu">옵션 메뉴</string>
 </resources>
