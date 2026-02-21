@@ -1,4 +1,4 @@
-# 📱 ToolWithMe Mobile (Android)
+# 📱 ToolWithMe (Mobile)
 
 > JWT 기반 인증을 유지한 상태에서 Spring Boot REST API와 통신하며,  
 > 공구 이미지 분석 기능을 네이티브 Android 환경으로 확장한 AI 서비스 모바일 클라이언트
@@ -7,7 +7,7 @@
 
 ## 📋 프로젝트 개요 (Project Overview)
 
-ToolWithMe Mobile은 기존 Spring Boot 기반 웹 서버와 연동하여  
+ToolWithMe(Mobile)는 기존 Spring Boot 기반 웹 서버와 연동하여  
 공구 이미지 분석 기능을 Android 네이티브 환경으로 확장한 클라이언트 애플리케이션입니다.
 
 이미지 업로드 → 서버 분석 → 결과 수신 → 공구 설명 및 관련 영상 제공까지  
@@ -134,7 +134,7 @@ GET /api/board
 
 ## 📱 Google Play 출시 (Deployment)
 
-ToolWithMe Mobile은 Google Play Store에 정식 출시되었습니다.
+ToolWithMe(Mobile)는 Google Play Store에 정식 출시되었습니다.
 
 👉 [Play Store 링크](https://play.google.com/store/apps/details?id=com.sylovestp.firebasetest.testspringrestapp&pcampaignid=web_share)
 
