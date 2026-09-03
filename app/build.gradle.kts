@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.sylovestp.firebasetest.testspringrestapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.sylovestp.firebasetest.testspringrestapp"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 18
-        versionName = "1.0.1"
+        targetSdk = 36
+        versionCode = 21
+        versionName = "1.0.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
