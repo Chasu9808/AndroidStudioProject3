@@ -19,7 +19,9 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -55,7 +57,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation(libs.androidx.paging.common.android)
     implementation(libs.androidx.paging.runtime.ktx)
-    implementation(libs.mediation.test.suite)
+//    implementation(libs.mediation.test.suite) 광고 SDK 경고로 인한 삭제
     implementation(libs.androidx.media3.common)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation("androidx.activity:activity-ktx:1.7.2")
