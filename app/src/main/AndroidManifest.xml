@@ -2,27 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    build.gradle.kts에 있기 때문에 Manifest의 package=가 더 이상 필요 없다   -->
-<!--    package="com.sylovestp.firebasetest.testspringrestapp">-->
+    <!-- build.gradle.kts에 있기 때문에 Manifest의 package=가 더 이상 필요 없다 -->
+    <!-- package="com.sylovestp.firebasetest.testspringrestapp"> -->
 
-    <!-- ✅ 필수 인터넷 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- ✅ Android 13 이상: 이미지/비디오 각각 권한 -->
-<!--    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />-->
-<!--    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />-->
+    <!-- Photo Picker를 사용하므로 READ_MEDIA_IMAGES 권한은 사용하지 않음 -->
+    <!-- <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" /> -->
 
-    <!-- ❌ deprecated: Android 13 이상에서 무시됨 -->
     <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
 
-    <!-- 📷 필요한 경우만 CAMERA 권한 주석 해제 -->
-     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-<!--    이제 광고 SDK 자체가 없어져서 제거할 AD_ID 권한도 없음.-->
-<!--    <uses-permission-->
-<!--        android:name="com.google.android.gms.permission.AD_ID"-->
-<!--        tools:node="remove" />-->
     <meta-data
         android:name="google_analytics_adid_collection_enabled"
         android:value="false" />
@@ -44,34 +37,87 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="35">
 
+        <activity
+            android:name=".CommentDetailActivity"
+            android:exported="true" />
 
-        <activity android:name=".CommentDetailActivity" android:exported="true" />
-        <activity android:name=".BoardDetailActivity" android:exported="true" />
-        <activity android:name=".BoardActivity" android:exported="true" />
-        <activity android:name=".ToolDetailActivity" android:exported="true" />
-        <activity android:name=".ToollistActivity" android:exported="true" />
-        <activity android:name=".MyPageActivity" android:exported="true" />
-        <activity android:name=".AddressFinder" android:exported="true">
-            <intent-filter>
-                <action android:name="com.example.addressfinder.FINDER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".AiPredictActivity" android:exported="true" />
-        <activity android:name=".UserRecyclerViewVer2Activity" android:exported="true" />
-        <activity android:name=".UserRecyclerViewActivity" android:exported="true" />
-        <activity android:name=".JoinActivity" android:exported="true" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".SplashActivity" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" android:exported="true" />
+        <activity
+            android:name=".BoardDetailActivity"
+            android:exported="true" />
 
+        <activity
+            android:name=".BoardActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ToolDetailActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ToollistActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".MyPageActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".AddressFinder"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action
+                    android:name="com.example.addressfinder.FINDER" />
+
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".AiPredictActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".UserRecyclerViewVer2Activity"
+            android:exported="true" />
+
+        <activity
+            android:name=".UserRecyclerViewActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".JoinActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
+
     </application>
+
 </manifest>
